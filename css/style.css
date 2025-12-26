@@ -1,5 +1,5 @@
 html {
-    -webkit-overflow-scrolling: touch; 
+    -webkit-overflow-scrolling: touch;
 }
 
 body {
@@ -8,6 +8,7 @@ body {
     color: #F2F2F2;
     font-family: 'Inter', sans-serif;
 }
+
 /* --- PAGE FADE-IN ON LOAD --- */
 body {
     opacity: 0;
@@ -18,20 +19,24 @@ body.page-loaded {
     opacity: 1;
 }
 
-
 /* --- GRAIN VIDEO--- */
 .grain-video {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-
-  pointer-events: none;
-  z-index: 9999;
-
-  opacity: 0.08;          /* ajustable */
-  mix-blend-mode: overlay; /* probá: overlay / soft-light */
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    z-index: 9999;
+    /* Zoom estático para ocultar bandas negras y hacer el grano más visible */
+    transform: scale(1.10);
+    transform-origin: center center;
+    will-change: transform, opacity, filter;
+    /* Aumentamos opacidad y usamos un modo de mezcla que resalta el grano */
+    opacity: 0.35;
+    mix-blend-mode: overlay;
+    /* Realce leve para que el grano se note más sin alterar colores drásticamente */
+    filter: contrast(1.2) saturate(1.03) brightness(1.02);
 }
 
 /* --- HEADER --- */
@@ -44,28 +49,22 @@ body.page-loaded {
     display: flex;
     justify-content: space-between;
     z-index: 10;
-    /* ✅ ELIMINADO: pointer-events: none; del header para que los botones funcionen */
-    transform: translate3d(0,0,0);
-    /* GSAP controla el transform, pero dejamos la transición para otros cambios */
+    transform: translate3d(0, 0, 0);
     transition: opacity 0.10s ease, filter 0.10s ease;
 }
 
 /* 🚀 AJUSTE CLAVE 1: Habilitar solo los botones principales (Menú y Contacto) */
-/* Esto evita que los enlaces del NAV oculto anulen el pointer-events: none del padre. */
 .menu-btn,
 .contact-btn {
-    pointer-events: auto; 
+    pointer-events: auto;
 }
-
 
 .header.hidden {
     opacity: 0;
     filter: blur(16px) brightness(1.2);
-    /* ELIMINADA la propiedad 'transform' aquí, ya que GSAP la controla */
 }
 
 /* --- ESTILOS BASE --- */
-
 .pill {
     padding: .45rem .9rem;
     border: 1px solid rgba(255, 255, 255, 0.35);
@@ -78,100 +77,59 @@ body.page-loaded {
     width: fit-content;
     white-space: nowrap;
     min-width: unset;
-/* 🚀 AÑADIR: Transición para Escala y Sombra */
+    /* 🚀 AÑADIR: Transición para Escala y Sombra */
     transition: transform 0.25s ease-out, box-shadow 0.25s ease-out, opacity 0.25s ease-out;
-    will-change: transform, box-shadow; /* Optimización */
+    will-change: transform, box-shadow;
 }
 
 /* NAV cerrado por defecto */
 .nav {
     position: absolute;
     top: 64px;
-    left: 1rem;
+    left: 1.5rem;
     display: flex;
     flex-direction: column;
     gap: .45rem;
-    opacity: 0;             /* oculto */
-    pointer-events: none;   /* ✅ CORREGIDO: Impide el click en toda la zona */
+    opacity: 0;
+    pointer-events: none;
     transform: translateY(-10px);
     /* 🚀 AÑADIR: Transición para Escala y Sombra */
     transition: transform 0.25s ease-out, box-shadow 0.25s ease-out, opacity 0.25s ease-out;
-    will-change: transform, box-shadow; /* Optimización */
+    will-change: transform, box-shadow;
 }
 
 /* NAV abierto */
 .nav.open {
     opacity: 1;
-    pointer-events: auto;   /* 👈 vuelve a permitir clics en toda la zona NAV */
+    pointer-events: auto;
     transform: translateY(0);
 }
 
-
-/*
-======================================================
-NAV LINKS CORREGIDO (Restauración de estilo de píldora)
-======================================================
-*/
-.nav a {
-    /* Propiedades de estilo para que se vean como píldoras */
-    padding: .45rem .9rem;
-    border: 1px solid rgba(255, 255, 255, 0.35); /* Borde de la píldora */
-    border-radius: 999px;
-    color: #F2F2F2; /* Color de texto blanco/claro */
-    font-size: 0.9rem;
-    text-decoration: none;
-    display: inline-block; /* Ocupa el espacio necesario */
-    width: fit-content;
-    white-space: nowrap;
-
-    /* Propiedades de animación (controladas por GSAP) */
-    opacity: 0;
-    transform: translateY(-10px);
-    filter: blur(6px);
-    transition: none !important;
-}
 /* ---------------------------------------------------- */
 /* 🚀 HOVER AVANZADO PARA BOTONES (.pill) - SOLO ESCALA Y GLOW LIMPIO */
 /* ---------------------------------------------------- */
 .pill:hover {
-    /* Efecto 1: Escala Sutil (pequeño crecimiento) */
-    transform: scale(1.05); 
-
-    /* Efecto 2: Glow Limpio (Sombra blanca más enfocada) */
-    /* Usamos una sola sombra de color blanco puro (rgba(255, 255, 255, 0.7)) con un buen blur (8px) */
+    transform: scale(1.05);
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
-    
-    /* 🛑 ELIMINAMOS opacity: 0.9; para evitar que el texto se desvanezca ligeramente */
-    /* (Si quieres el desvanecimiento, vuelve a poner opacity: 0.9;) */
 }
 
 /* ---------------------------------------------------- */
 /* 🚀 HOVER AVANZADO PARA ENLACES NAV (.nav a) - SOLO ESCALA Y GLOW LIMPIO */
 /* ---------------------------------------------------- */
 .nav a:hover {
-    /* Efecto 1: Escala Sutil */
     transform: scale(1.05);
-
-    /* Efecto 2: Glow Limpio */
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
-    
-    /* 🛑 ELIMINAMOS opacity: 0.9; */
 }
 
-/*
-======================================================
-HERO WORDS (LUCA BLAKO)
-======================================================
-*/
-
-/* ✅ CORRECCIÓN CLAVE: ESTILO BASE PARA TODAS LAS PALABRAS/FRASES ANIMADAS */
+/* ====================================================== 
+   HERO WORDS (LUCA BLAKO) 
+   ====================================================== */
 .hero-word {
     opacity: 0;
     transform: translateY(60px);
     filter: blur(15px);
     will-change: opacity, transform, filter;
     display: block;
-    /* Estilo por defecto (el grande, para LUCA BLAKO) */
     font-family: 'Oswald', sans-serif;
     font-size: 6rem;
     font-weight: 200;
@@ -181,59 +139,51 @@ HERO WORDS (LUCA BLAKO)
     text-transform: uppercase;
 }
 
-/* 🛑 CORRECCIÓN CLAVE: Este selector es más específico, así que tiene precedencia y define el tamaño */
 .hero-word.name-luca,
 .hero-word.name-blako {
-    /* Mantenemos el estilo grande aquí */
     display: block;
     font-family: 'Oswald', sans-serif;
     font-size: 6rem;
     font-weight: 200;
     letter-spacing: 0.2em;
     line-height: 1;
-    margin-left: -0.5rem;
+    margin-left: -0.5rem; /* Alineación solicitada */
 }
 
-/* 🚀 CORRECCIÓN CLAVE: Restaurar el estilo pequeño y legible para las frases secundarias */
+/* 🚀 CORRECCIÓN CLAVE: Estilo para las frases secundarias */
 .tagline {
-    /* Sobreescribe las propiedades de .hero-word para hacerla pequeña */
     margin-top: 1rem;
     font-family: 'Inter', sans-serif;
     font-size: 1rem;
     letter-spacing: .2em;
     text-transform: uppercase;
     opacity: 0.75;
-    /* Resetear el line-height y font-weight para mejor legibilidad */
-    font-weight: 400; 
+    font-weight: 400;
     line-height: .5;
     margin-bottom: 0;
 }
 
-/* ======================================================
-HERO LAYOUT (Z-INDEX)
-======================================================
-*/
-
+/* ====================================================== 
+   HERO LAYOUT (Z-INDEX) 
+   ====================================================== */
 .hero {
     height: 100vh;
-    position: sticky; 
-    top: 0; 
+    position: sticky;
+    top: 0;
     overflow: hidden;
-    transform: translate3d(0, 0, 0); 
-    /* Z-INDEX alto para que la imagen se vea sobre la Bio al inicio */
-    z-index: 6; 
-    opacity: 1; 
-    will-change: opacity, transform; 
+    transform: translate3d(0, 0, 0);
+    z-index: 6;
+    opacity: 1;
+    will-change: opacity, transform;
 }
 
 .hero-image-layer {
     position: absolute;
     inset: 0;
-    background: url('../assets/images/Hero1.jpg') center center no-repeat;
+    background: url('/assets/images/Hero1.jpg') center center no-repeat;
     background-size: cover;
-    /* La imagen debe estar debajo del texto (z-index: 3) */
-    z-index: 2; 
-    opacity: 1; 
+    z-index: 2;
+    opacity: 1;
     will-change: opacity, transform, filter;
     transition: none;
 }
@@ -242,15 +192,12 @@ HERO LAYOUT (Z-INDEX)
     position: absolute;
     bottom: 5vh;
     left: 1rem;
-    /* El texto debe estar encima de la imagen (z-index: 2) */
-    z-index: 3; 
+    z-index: 3;
     color: #fff;
     will-change: transform, opacity, filter;
     animation: none;
-    transform: translate3d(0, 0, 0); 
+    transform: translate3d(0, 0, 0);
 }
-
-/* ... Código intermedio ... */
 
 /* --- SECTIONS --- */
 .section {
@@ -258,22 +205,16 @@ HERO LAYOUT (Z-INDEX)
     padding: 2rem 1.2rem;
     position: relative;
     background: #0A0A0A;
-    /* Mantenemos el z-index de las secciones por debajo del Hero */
-    z-index: 5; 
+    z-index: 5;
 }
-
 
 /* --- BIO --- */
 #bio {
     min-height: 100vh;
-    padding: 2rem 1.2rem; /* El padding se mantiene */
+    padding: 2rem 1.2rem;
     position: relative;
-    /*background: #0A0A0A !important;*/
     background: transparent;
-    z-index: 5; 
-    transition: none !important; 
-    
-    /* 🚀 AJUSTE 1: Flexbox vertical en el contenedor principal */
+    z-index: 5;
     display: flex;
     flex-direction: column;
 }
@@ -284,23 +225,18 @@ HERO LAYOUT (Z-INDEX)
     font-size: 2.8rem;
     letter-spacing: .25em;
     text-align: center;
-    margin-bottom: 1rem; 
-    /* El título empuja al wrapper hacia abajo, quedando anclado arriba */
+    margin-bottom: 1rem;
 }
 
-/* 🚀 Contenedor de los Párrafos (El que se centra) */
+/* 🚀 Contenedor de los Párrafos (Centrado Vertical) */
 .bio-wrapper {
-    /* 🚀 AJUSTE 2: Crece para ocupar todo el espacio restante */
-    flex-grow: 1; 
-    
-    /* Aplicar Flexbox para centrar los párrafos internamente */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centra los párrafos en el medio del wrapper */
+    justify-content: center;
     align-items: center;
 }
 
-/* Los párrafos deben tener su estilo, pero NO deben tener Flexbox ni height: 100% */
 .bio-wrapper p {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 1.05rem;
@@ -309,26 +245,23 @@ HERO LAYOUT (Z-INDEX)
     letter-spacing: 0.01em;
     text-align: center;
     opacity: 1;
-    margin: 0 auto;
+    margin: 0 auto 2.5rem auto;
     max-width: 450px;
-    margin-bottom: 2.5rem;
     will-change: transform, opacity, filter;
 }
 
 @media (min-width: 1024px) {
-    /* ... (Estilos media query sin cambios) ... */
     .bio-wrapper p {
-        font-size: 1.35rem; 
-        max-width: 450px; 
-        line-height: 1.85; 
+        font-size: 1.35rem;
+        max-width: 450px;
+        line-height: 1.85;
     }
-
     .bio-title {
         font-size: 3.6rem;
     }
 }
 
-/* Reveal (Se aplica a secciones sin animación GSAP dedicada) */
+/* Reveal genérico */
 .scroll-reveal {
     opacity: 0;
     transform: translateY(50px);
@@ -352,15 +285,14 @@ HERO LAYOUT (Z-INDEX)
     will-change: transform, opacity, filter;
 }
 
-/* ============================
-    TATTOO SECTION (CAROUSEL)
-    ============================ */
-
+/* ============================ 
+   TATTOO SECTION (CAROUSEL) 
+   ============================ */
 .tattoo-section {
     contain: layout paint size style;
     position: relative;
     padding-top: 0;
-    z-index: 6; 
+    z-index: 8;
     height: 100vh;
     width: 100%;
     overflow: hidden;
@@ -368,7 +300,6 @@ HERO LAYOUT (Z-INDEX)
     touch-action: pan-y;
 }
 
-/* Base de fondo para ambas capas */
 .tattoo-bg {
     position: absolute;
     inset: 0;
@@ -378,71 +309,63 @@ HERO LAYOUT (Z-INDEX)
     background-repeat: no-repeat;
     filter: brightness(0.88);
     transition: none;
-    z-index: 1; 
-    will-change: transform, opacity, filter; /* Aseguramos que GSAP sea el único que mueva esto */
-    /* 🛑 ELIMINADA LINEA DUPLICADA: transition: none !important; */
+    z-index: 1;
+    will-change: transform, opacity, filter;
 }
 
-/* Capa 2: La capa visible (Se desliza) */
 .tattoo-bg.layer-2 {
-    z-index: 2; 
+    z-index: 2;
 }
 
-/* Capa 1: Precarga (Estatico, debajo) */
 .tattoo-bg.layer-1 {
-    z-index: 1; 
+    z-index: 1;
 }
 
-/* 🛑 CORRECCIÓN DE SINTAXIS Y Z-INDEX */
 .tattoo-content {
     position: relative;
-    z-index: 10; /* BAJAMOS EL Z-INDEX para que las flechas (20) estén encima */
+    z-index: 10;
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; 
+    justify-content: flex-start;
     padding: 2rem 1.5rem;
-} 
-
-/* Texto editorial */
-.tattoo-overlay-text {
-  position: absolute;
-  bottom: 4.5rem;
-  left: 2rem;
-
-  max-width: 420px;
-
-  text-align: left;
-
-  pointer-events: none;
-  
 }
 
+.tattoo-overlay-text {
+    position: static;
+    max-width: 520px;
+    text-align: left;
+    pointer-events: none;
+}
 
-.tattoo-placeholder-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.2rem;
-    letter-spacing: .15em;
-   margin-bottom: 0.6rem;
+.tattoo-meta {
+    position: absolute;
+    top: 2.2rem;
+    left: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .85rem;
+    max-width: 520px;
+    z-index: 22;
+    pointer-events: auto;
 }
 
 .tattoo-placeholder-p {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.95rem;
+    font-size: 1.02rem;
     line-height: 1.45;
-    opacity: 0.85;
+    opacity: 0.92;
 }
 
 /* FLECHAS */
 .tattoo-arrows {
     position: absolute;
     inset: 0;
-    z-index: 20; /* DEBE SER MAYOR que tattoo-content (10) */
-    pointer-events: none; 
+    z-index: 20;
+    pointer-events: none;
 }
 
-/* 🛑 AJUSTE CLAVE 2: Aseguramos que solo los elementos .arrow sean clicables */
 .tattoo-arrows .arrow {
     position: absolute;
     top: 50%;
@@ -452,22 +375,55 @@ HERO LAYOUT (Z-INDEX)
     color: rgba(255,255,255,0.35);
     cursor: pointer;
     user-select: none;
-    transition: opacity .25s;
-    pointer-events: auto; 
+    transition: opacity .25s, transform .25s, text-shadow .25s;
+    pointer-events: auto;
+    text-shadow: 0 0 6px rgba(255,255,255,0.35);
+    animation: arrowPulse 5s ease-in-out infinite;
 }
 
 .tattoo-arrows .arrow:hover {
     opacity: 0.9;
+    transform: translateY(-50%) scale(1.25);
+    text-shadow: 0 0 12px rgba(255,255,255,0.75);
 }
 
 .arrow.left { left: 1rem; }
 .arrow.right { right: 1rem; }
 
-/* Efecto visual para mostrar que las flechas son clickeables */
-.tattoo-arrows .arrow {
-    transition: opacity .25s, transform .25s, text-shadow .25s;
-    text-shadow: 0 0 6px rgba(255,255,255,0.35);
-    animation: arrowPulse 5s ease-in-out infinite;
+/* Carousel pagination dots */
+.carousel-dots {
+    position: fixed;
+    left: 50%;
+    bottom: 1.6rem;
+    transform: translateX(-50%);
+    display: flex;
+    gap: .6rem;
+    align-items: center;
+    justify-content: center;
+    z-index: 100001;
+    pointer-events: auto;
+    --dot-size: clamp(7px, 1.1vw, 10px);
+}
+
+.carousel-dots .dot {
+    width: var(--dot-size);
+    height: var(--dot-size);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    border: none;
+    cursor: pointer;
+    transition: transform .18s ease, background .18s ease, box-shadow .18s ease, opacity .18s ease;
+    display: inline-block;
+    opacity: 0.95;
+    box-sizing: border-box;
+}
+
+.carousel-dots .dot.active {
+    background: rgba(255, 255, 255, 0.616);
+    transform: scale(1.08);
+    box-shadow: 0 0 6px rgba(255,255,255,0.10), 0 0 14px rgba(255,200,120,0.06);
+    opacity: 1;
 }
 
 @keyframes arrowPulse {
@@ -476,159 +432,151 @@ HERO LAYOUT (Z-INDEX)
     100% { transform: translateY(-50%) scale(1); opacity: 0.6; }
 }
 
-.tattoo-arrows .arrow:hover {
-    transform: translateY(-50%) scale(1.25);
-    text-shadow: 0 0 12px rgba(255,255,255,0.75);
-}
-
-
 @media (min-width: 768px) {
     .hero-text { left: 2rem; }
     .name-luca, .name-blako { font-size: 6.5rem; }
 }
-/* ======================================================
-   Ajuste de compensación de Scroll (FIX para Header fijo)
-   ====================================================== */
-/* 🔑 CLAVE: Compensación de la altura total del Header (~60px) + 1px de seguridad. */
+
+/* Compensación Scroll */
 section[id] {
-    /* Activado: compensa la altura del header para anclas */
-    scroll-margin-top: 61px; /* Asegura que la sección se alinee JUSTO debajo del header */
+    scroll-margin-top: 61px;
 }
 
 .tattoo-cta {
-  color: #fff;          /* 👈 esto faltaba */
-  background: transparent;
-  position: absolute;
-  bottom: 2.2rem;
-  right: 2.2rem;
-  z-index: 25; /* mayor que tattoo-content (10) y arrows (20) */
-  will-change: transform, box-shadow;
-
-  opacity: 0;
-  transform: translateY(20px);
-
-  padding: .7rem 1.4rem;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.35);
-  background: transparent;
-
-  font-size: .85rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-
-  cursor: pointer;
-  pointer-events: none;
-
-  transition: transform .35s ease, box-shadow .6s ease;
+    color: #fff;
+    background: transparent;
+    position: static;
+    z-index: 25;
+    will-change: transform, box-shadow;
+    opacity: 0;
+    transform: translateY(6px);
+    padding: .55rem 1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.35);
+    font-size: .85rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    pointer-events: none;
+    transition: transform .28s ease, box-shadow .6s ease, opacity .28s ease;
+    display: inline-block;
+    width: fit-content;
 }
 
 .tattoo-cta:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 12px rgba(255,255,255,.45);
+    transform: translateY(-3px);
+    box-shadow: 0 0 12px rgba(255,255,255,.45);
 }
 
-
-
-
-
-/* =========================
-   CONTACT SECTION
-   ========================= */
-
+/* ========================= CONTACT SECTION ========================= */
 .contact-section {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background:
-    radial-gradient(
-      1200px 600px at 80% 20%,
-      rgba(255,255,255,0.04),
-      transparent 60%
-    ),
-    #0A0A0A;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(
+        1200px 600px at 80% 20%,
+        rgba(255,255,255,0.04),
+        transparent 60%
+    ), #0A0A0A;
 }
-
 
 .contact-inner {
-  max-width: 520px;
-  width: 100%;
-  padding: 2rem 1.5rem;
-  text-align: center;
+    max-width: 520px;
+    width: 100%;
+    padding: 2rem 1.5rem;
+    text-align: center;
 }
 
 .contact-title {
-  font-family: 'Oswald', sans-serif;
-  font-size: 2.8rem;
-  font-weight: 200;
-  letter-spacing: .25em;
-  margin-bottom: 2.5rem;
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 200;
+    letter-spacing: .25em;
+    margin-bottom: 2.5rem;
 }
 
 .contact-intro {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.2rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
 }
 
 .contact-sub {
-  font-size: 0.95rem;
-  opacity: 0.75;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-.contact-sub-last {
-  
-  margin-bottom: 4rem; /* aire largo antes del CTA */
+    font-size: 0.95rem;
+    opacity: 0.75;
+    line-height: 1.6;
+    margin-bottom: 1rem;
 }
 
+.contact-sub-last { margin-bottom: 4rem; }
 
 .contact-cta {
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.35);
-  border-radius: 999px;
-  padding: .8rem 1.6rem;
-  color: #F2F2F2;
-  font-size: 0.95rem;
-  cursor: pointer;
-  margin-bottom: 4rem;
-  transition: transform .35s ease, box-shadow .8s ease;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 999px;
+    padding: .8rem 1.6rem;
+    color: #F2F2F2;
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin-bottom: 4rem;
+    transition: transform .35s ease, box-shadow .8s ease;
 }
 
 .contact-cta:hover {
-  transform: scale(1.035);
-  box-shadow: 0 0 16px rgba(255,255,255,0.45);
+    transform: scale(1.035);
+    box-shadow: 0 0 16px rgba(255,255,255,0.45);
 }
 
 .contact-alt {
-  margin-bottom: 2rem;
-  font-size: 0.85rem;
-  opacity: 0.7;
+    margin-bottom: 2rem;
+    font-size: 0.85rem;
+    opacity: 0.7;
 }
 
 .contact-links {
-  margin-top: .75rem;
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
+    margin-top: .75rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
 }
 
 .contact-links a {
-  color: #F2F2F2;
-  text-decoration: none;
-  font-size: 0.9rem;
-  border-bottom: 1px solid transparent;
-  transition: border-color .2s ease;
+    color: #F2F2F2;
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s ease;
 }
 
 .contact-links a:hover {
-  border-color: rgba(255,255,255,0.6);
+    border-color: rgba(255,255,255,0.6);
 }
 
 .contact-note {
-  font-size: 0.75rem;
-  opacity: 0.5;
-  line-height: 1.6;
+    font-size: 0.75rem;
+    opacity: 0.5;
+    line-height: 1.6;
 }
 
+@media (max-width: 640px) {
+    .tattoo-meta {
+        position: static;
+        padding: 0 1rem;
+        max-width: calc(100% - 2rem);
+    }
+    .tattoo-cta {
+        position: absolute;
+        bottom: 4.2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 3rem);
+        max-width: 420px;
+        display: inline-block;
+        pointer-events: auto;
+        box-sizing: border-box;
+    }
+    .carousel-dots { bottom: 1.2rem; }
+    .carousel-dots .dot { width: 9px; height: 9px; }
+}

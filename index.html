@@ -1,148 +1,139 @@
 <!doctype html>
 <html lang="es">
 <head>
-    <link rel="preload" href="assets/images/Hero1.jpg" as="image">
+    <link rel="preload" href="/assets/images/Hero1.jpg" as="image">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Luca Blako</title>
-
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300&family=Inter:wght@300;400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    
 </head>
 <body>
-<video class="grain-video" autoplay muted loop playsinline>
-  <source src="grain.mp4" type="video/mp4">
-</video>
+    <video class="grain-video" autoplay muted loop playsinline preload="auto">
+        <source src="assets/videos/noise-mp4-720.mp4" type="video/mp4">
+        </video>
 
+    <script>
+    (function(){
+        const v = document.querySelector('.grain-video');
+        if (!v) return;
+        v.addEventListener('loadeddata', () => {
+            console.log('grain video: loadeddata — attempting play');
+            v.play().then(() => console.log('grain video: playing')).catch(err => console.error('grain video: play() failed', err));
+        });
+        v.addEventListener('error', (e) => console.error('grain video error event', e));
+        v.addEventListener('stalled', () => console.warn('grain video stalled'));
+        // Si no se dispara loadeddata en 2s, intentar play manualmente y reportar
+        setTimeout(() => {
+            if (v.readyState < 3) {
+                console.warn('grain video: readyState low (', v.readyState, '), trying play() anyway');
+                v.play().catch(err => console.error('grain video: delayed play() failed', err));
+            }
+        }, 2000);
+    })();
+    </script>
 
-<header class="header">
-    <button class="menu-btn pill" id="menuBtn">Menu</button>
-    <a class="contact-btn pill" id="contactBtn" href="#contacto">Contacto</a> 
+    <header class="header">
+        <button class="menu-btn pill" id="menuBtn">Menu</button>
+        <a class="contact-btn pill" id="contactBtn" href="#contacto">Contacto</a>
+        <nav class="nav" id="navMenu">
+            <a class="pill" href="#bio">Bio</a>
+            <a class="pill" href="#tattoo">Tattoo</a>
+            <a class="pill" href="#escultura">Escultura</a>
+            <a class="pill" href="#pintura">Pintura</a>
+            <a class="pill" href="#ilustracion">Ilustración</a>
+            <a class="pill" href="#foto">Foto / Video</a>
+            <a class="pill" href="#tienda">Tienda</a>
+        </nav>
+    </header>
 
-    <nav class="nav" id="navMenu">
-        <a href="#bio">Bio</a>
-        <a href="#tattoo">Tattoo</a>
-        <a href="#escultura">Escultura</a>
-        <a href="#pintura">Pintura</a>
-        <a href="#ilustracion">Ilustración</a>
-        <a href="#foto">Foto / Video</a>
-        <a href="#tienda">Tienda</a>
-    </nav>
-</header>
+    <main>
+        <section class="hero" id="hero">
+            <div id="heroImageLayer" class="hero-image-layer" style="background-image: url('/assets/images/Hero1.jpg'); background-size: cover; background-position: center center;"></div>
+            <div class="hero-text">
+                <div class="hero-text-content">
+                    <div id="hero-sequence">
+                        <span class="hero-word name-luca">LUCA</span>
+                        <span class="hero-word name-blako">BLAKO</span>
+                        <span class="hero-word tagline">Un artista</span>
+                        <span class="hero-word tagline">Múltiples lenguajes visuales</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<main>
-    <section class="hero" id="hero">
-        <div id="heroImageLayer" class="hero-image-layer"></div>
-        
-        <div class="hero-text">
-    <div class="hero-text-content">
-        <div id="hero-sequence">
-            <span class="hero-word name-luca">LUCA</span>
-            <span class="hero-word name-blako">BLAKO</span>
-            <span class="hero-word tagline">Un artista</span>
-            <span class="hero-word tagline">Múltiples lenguajes visuales</span>
-        </div>
-    </div>
-</div>
-    </section>
+        <section id="bio" class="section bg1">
+            <h2 class="bio-title">BIO</h2>
+            <div class="bio-wrapper">
+                <p>Soy un artista visual.</p>
+                <p>La creación es mi forma de expresión y el criterio, mi herramienta principal.</p>
+                <p>Trabajo en distintos lenguajes — tatuaje, ilustración, imagen, objeto — no como disciplinas separadas, sino como formas distintas de decir lo mismo.</p>
+                <p>Cada pieza parte de una idea, una intención y un proceso consciente.</p>
+                <p>El tiempo, la atención y la decisión importan tanto como el resultado. No improviso, no produzco en serie y no persigo tendencias.</p>
+                <p>El tatuaje es el lenguaje más directo de este mundo creativo: donde la idea, el cuerpo y la técnica se encuentran.</p>
+            </div>
+        </section>
 
+        <section id="tattoo" class="tattoo-section">
+            <div class="tattoo-bg layer-1"></div>
+            <div class="tattoo-bg layer-2"></div>
+            <div class="tattoo-arrows">
+                <div class="arrow left">&#10094;</div>
+                <div class="arrow right">&#10095;</div>
+            </div>
+            <div class="tattoo-content">
+                <div class="tattoo-meta">
+                    <div class="tattoo-overlay-text">
+                        <h3 class="tattoo-placeholder-title">TITLE PLACEHOLDER</h3>
+                        <p class="tattoo-placeholder-p">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae.
+                        </p>
+                    </div>
+                    <button class="tattoo-cta">
+                        Iniciar una consulta
+                    </button>
+                </div>
+                </div>
+        </section>
 
-    <section id="bio" class="section bg1">
-        <h2 class="bio-title">BIO</h2>
-        <div class="bio-wrapper">
-            <p>
-                
-            <p>Soy un artista visual.</p>
-      <p>
-                La creación es mi forma de expresión y el criterio, mi herramienta principal.
-            </p>
-          <p>
-                Trabajo en distintos lenguajes — tatuaje, ilustración, imagen, objeto — no como disciplinas separadas, sino como formas distintas de decir lo mismo.
-            </p>
-            <p>
-                Cada pieza parte de una idea, una intención y un proceso consciente.
-            </p>
-          <p>
-                El tiempo, la atención y la decisión importan tanto como el resultado. No improviso, no produzco en serie y no persigo tendencias.
-            </p>
-          <p>
-                El tatuaje es el lenguaje más directo de este mundo creativo: donde la idea, el cuerpo y la técnica se encuentran.
-            </p>
-        </div>
-    </section>
+        <section id="escultura" class="section bg5 scroll-reveal">Escultura</section>
+        <section id="ilustracion" class="section bg3 scroll-reveal">Ilustración</section>
+        <section id="pintura" class="section bg2 scroll-reveal">Pintura</section>
+        <section id="foto" class="section bg4 scroll-reveal">Foto / Video</section>
+        <section id="tienda" class="section bg6 scroll-reveal">Tienda</section>
 
-    <section id="tattoo" class="tattoo-section">
-        <div class="tattoo-bg layer-1"></div>
-        <div class="tattoo-bg layer-2"></div> 
-
-        <div class="tattoo-arrows">
-            <div class="arrow left">&#10094;</div>
-            <div class="arrow right">&#10095;</div>
-        </div>
-
-        <div class="tattoo-content">           
-            <div class="tattoo-overlay-text">
-                <h3 class="tattoo-placeholder-title">TITLE PLACEHOLDER</h3>
-                <p class="tattoo-placeholder-p">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae.
+        <section id="contacto" class="section contact-section">
+            <div class="contact-inner">
+                <h2 class="contact-title">CONTACTO</h2>
+                <p class="contact-intro">
+                    Si querés empezar un proyecto,<br> el primer paso es una consulta.
+                </p>
+                <p class="contact-sub">
+                    No es un compromiso ni una reserva inmediata.<br> Es una conversación para entender la idea y ver cómo seguir.
+                </p>
+                <p class="contact-sub contact-sub-last">
+                    Trabajo desde estudio privado en Buenos Aires.
+                </p>
+                <button class="contact-cta" id="openContactForm">
+                    Agendá tu consulta
+                </button>
+                <div class="contact-alt">
+                    <span>También podés escribirme por:</span>
+                    <div class="contact-links">
+                        <a href="https://instagram.com/TUUSUARIO" target="_blank">Instagram</a>
+                        <a href="mailto:tuemail@email.com">Email</a>
+                    </div>
+                </div>
+                <p class="contact-note">
+                    Respondo con calma.<br> Si no es inmediato, es parte del proceso.
                 </p>
             </div>
-        </div>
-      <button class="tattoo-cta">
-  Iniciar una consulta
-</button>
-    </section>
-    <section id="escultura" class="section bg5 scroll-reveal">Escultura</section>
-    <section id="ilustracion" class="section bg3 scroll-reveal">Ilustración</section>
-    <section id="pintura" class="section bg2 scroll-reveal">Pintura</section>
-    <section id="foto" class="section bg4 scroll-reveal">Foto / Video</section>
-    <section id="tienda" class="section bg6 scroll-reveal">Tienda</section>
-    <section id="contacto" class="section contact-section">
-  <div class="contact-inner">
+        </section>
+    </main>
 
-    <h2 class="contact-title">CONTACTO</h2>
-
-    <p class="contact-intro">
-      Si querés empezar un proyecto,<br>
-      el primer paso es una consulta.
-    </p>
-
-    <p class="contact-sub">
-      No es un compromiso ni una reserva inmediata.<br>
-      Es una conversación para entender la idea y ver cómo seguir.
-    </p>
-    <p class="contact-sub contact-sub-last">
-      Trabajo desde estudio privado en Buenos Aires.
-    </p>
-
-    <button class="contact-cta" id="openContactForm">
-      Agendá tu consulta
-    </button>
-
-    <div class="contact-alt">
-      <span>También podés escribirme por:</span>
-      <div class="contact-links">
-        <a href="https://instagram.com/TUUSUARIO" target="_blank">Instagram</a>
-        <a href="mailto:tuemail@email.com">Email</a>
-      </div>
-    </div>
-
-    <p class="contact-note">
-      Respondo con calma.<br>
-      Si no es inmediato, es parte del proceso.
-    </p>
-
-  </div>
-</section>
-
-
-</main>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
-<script src="js/main.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
