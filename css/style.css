@@ -580,3 +580,26 @@ section[id] {
     .carousel-dots { bottom: 1.2rem; }
     .carousel-dots .dot { width: 9px; height: 9px; }
 }
+/* ======================================================
+   FAIL-SAFE: VISIBILIDAD SIN GSAP
+   ====================================================== */
+html.no-gsap body {
+    opacity: 1 !important;
+}
+html.no-gsap .hero-word,
+html.no-gsap .hero-text-content,
+html.no-gsap .bio-title,
+html.no-gsap .bio-wrapper p,
+html.no-gsap .scroll-reveal,
+html.no-gsap .tattoo-section,
+html.no-gsap .tattoo-overlay-text,
+html.no-gsap .tattoo-cta,
+html.no-gsap .contact-inner {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+}
+
+html.no-gsap .grain-video {
+  display: none !important;
+}

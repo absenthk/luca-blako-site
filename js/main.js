@@ -1,6 +1,5 @@
-// =============================
-// main.js - VERSIÓN LIMPIA (Sin Snap Scrolling) - FIX CTA BLUR
-// =============================
+// FAIL-SAFE: remover modo sin GSAP cuando GSAP está disponible
+document.documentElement.classList.remove("no-gsap");
 
 gsap.config({
     force3D: true
@@ -554,35 +553,26 @@ function setupBioToTattooTransition() {
     // ── ESTADO BASE ──
     gsap.set(bioElements, {
         opacity: 0,
-        y: 60, // ⬅️ menos desplazamiento
+        y: 60,
         filter: "blur(18px)"
     });
 
-    gsap.timeline({
-            scrollTrigger: {
-                trigger: bioSection,
-                start: "top 80%", // ⬅️ empieza antes
-                end: "bottom 0%", // ⬅️ termina mucho después
-                scrub: true
-            }
-        })
-        // ── ENTRADA ──
-        .to(bioElements, {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            stagger: 0.15, // ⬅️ más aire entre párrafos
-            ease: "power1.out" // ⬅️ más orgánico
-        }, 0)
-        // ── SALIDA ──
-        .to(bioElements, {
-            opacity: 0,
-            y: -20,
-            filter: "blur(12px)",
-            stagger: 0.12,
-            ease: "power1.in"
-        }, 1.40); // ⬅️ salida tardía
+    // ── ENTRADA + SALIDA con scroll directo ──
+    gsap.to(bioElements, {
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        stagger: 0.15,
+        ease: "none", // sin easing para que siga el scroll
+        scrollTrigger: {
+            trigger: bioSection,
+            start: "top 90%", // empieza cuando entra
+            end: "bottom 80%", // termina cuando sale
+            scrub: true // clave para que la animación siga el scroll
+        }
+    });
 }
+
 
 
 // =========================================
