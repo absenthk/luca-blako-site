@@ -134,6 +134,8 @@ function initAnimations() {
     setupHeroEffects();
     setupSmartHeader();
     setupContactEffects();
+    setupIlustracionAnimation();
+
 }
 
 // Ejecutar cuando cargue el DOM
@@ -970,6 +972,49 @@ openContactFormBtn?.addEventListener("click", () => {
     // - o redirigir a calendario
     console.log("CTA contacto clickeado");
 });
+// =============================
+// Animación cinematográfica de la sección Ilustración
+// =============================
+function setupIlustracionAnimation() {
+    const seccion = document.getElementById("ilustracion");
+    if (!seccion) return;
+
+    const titulo = seccion.querySelector(".ilustracion-title");
+    const parrafos = seccion.querySelectorAll(".ilustracion-wrapper p");
+    const elementos = [titulo, ...parrafos];
+
+    // Estado inicial
+    gsap.set(elementos, {
+        opacity: 0,
+        y: 60,
+        filter: "blur(18px)"
+    });
+
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: seccion,
+            start: "top 80%",
+            end: "bottom 0%",
+            scrub: true
+        }
+    })
+    // Fade-in + entrada
+    .to(elementos, {
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        stagger: 0.15,
+        ease: "power1.out"
+    }, 0)
+    // Fade-out al salir (suave)
+    .to(elementos, {
+        opacity: 0,
+        y: -20,
+        filter: "blur(12px)",
+        stagger: 0.12,
+        ease: "power1.in"
+    }, 1.40);
+}
 
 
 // =============================
