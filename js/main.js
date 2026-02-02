@@ -506,6 +506,25 @@ navLinks.forEach(link => {
         const href = link.getAttribute("href");
         if (!href) return;
 
+        // Special-case: if the menu link points to the separate tattoo page,
+        // navigate immediately (ensures menu->tattoo always works)
+        if (href === 'tattoo.html' || href.endsWith('/tattoo.html')) {
+            if (menuOpen && menuTimeline) {
+                menuTimeline.timeScale(1.6).reverse();
+                menuTimeline.eventCallback("onReverseComplete", () => {
+                    nav.classList.remove("open");
+                    menuOpen = false;
+                    menuBtn.textContent = "Menu";
+                    hideHeaderCinematic();
+                    window.location.href = href;
+                });
+            } else {
+                hideHeaderCinematic();
+                window.location.href = href;
+            }
+            return;
+        }
+
         // Si es un anchor local (empieza con '#'), hacemos scroll animado
         if (href.startsWith('#')) {
             const target = document.querySelector(href);
