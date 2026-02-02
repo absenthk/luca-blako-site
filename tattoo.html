@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Tattoo — Luca Blako</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300&family=Inter:wght@300;400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+    <video class="grain-video" autoplay muted loop playsinline preload="auto">
+        <source src="assets/videos/noise-mp4-720.mp4" type="video/mp4">
+    </video>
+
+    <header class="header">
+        <a class="pill" href="index.html">Inicio</a>
+        <button class="menu-btn pill" id="menuBtn">Menu</button>
+        <a class="contact-btn pill" id="contactBtn" href="#contacto">Contacto</a>
+        <nav class="nav" id="navMenu">
+            <a class="pill" href="index.html#bio">Bio</a>
+            <a class="pill" href="tattoo.html">Tattoo</a>
+            <a class="pill" href="index.html#ilustracion">Ilustración</a>
+            <a class="pill" href="index.html#pintura">Pintura</a>
+            <a class="pill" href="index.html#escultura">Escultura</a>
+            <a class="pill" href="index.html#foto">Foto / Video</a>
+            <a class="pill" href="index.html#tienda">Tienda</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="tattoo" class="tattoo-section">
+            <div class="tattoo-bg layer-1"></div>
+            <div class="tattoo-bg layer-2"></div>
+            <div class="tattoo-arrows">
+                <div class="arrow left">&#10094;</div>
+                <div class="arrow right">&#10095;</div>
+            </div>
+            <div class="tattoo-content">
+                <div class="tattoo-meta">
+                    <div class="tattoo-overlay-text">
+                        <h3 class="tattoo-placeholder-title">TITLE PLACEHOLDER</h3>
+                        <p class="tattoo-placeholder-p">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae.
+                        </p>
+                    </div>
+                    <button class="tattoo-cta">
+                        Iniciar una consulta
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+(function waitForGSAP() {
+  const maxRetries = 10;
+  let attempts = 0;
+
+  const checkGSAP = () => {
+    if (window.gsap) {
+      console.log('GSAP cargado correctamente.');
+      return;
+    }
+
+    attempts++;
+    if (attempts >= maxRetries) {
+      document.documentElement.classList.add('no-gsap');
+      console.warn('GSAP no cargó → activando modo failsafe');
+    } else {
+      setTimeout(checkGSAP, 200);
+    }
+  };
+
+  checkGSAP();
+})();
+</script>
+
+</body>
+</html>

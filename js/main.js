@@ -4,7 +4,51 @@ document.documentElement.classList.remove("no-gsap");
 gsap.config({
     force3D: true
 });
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+try {
+    if (window.ScrollTrigger && window.ScrollToPlugin) {
+        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+    } else {
+        console.warn('Some GSAP plugins are not available at registration time.');
+    }
+} catch (err) {
+    console.warn('gsap.registerPlugin failed:', err);
+}
+
+// --- Safety wrappers: ignore attempts to animate null/empty targets ---
+;(function makeGsapSafe(){
+    if (!window.gsap) return;
+    const g = window.gsap;
+    const wrap = (fnName) => {
+        const orig = g[fnName];
+        if (typeof orig !== 'function') return;
+        g[fnName] = function(targets, vars) {
+            // normalize
+            if (targets == null) return null;
+            // string selector
+            if (typeof targets === 'string') {
+                const nodes = document.querySelectorAll(targets);
+                if (!nodes || nodes.length === 0) return null;
+            }
+            // NodeList or Array
+            if (NodeList && targets instanceof NodeList) {
+                if (targets.length === 0) return null;
+            }
+            if (Array.isArray(targets) && targets.length === 0) return null;
+            // single Element not in DOM
+            if (targets instanceof Element) {
+                if (!document.body.contains(targets)) return null;
+            }
+            try {
+                return orig.apply(this, arguments);
+            } catch (e) {
+                console.warn('gsap.'+fnName+' failed safely:', e);
+                return null;
+            }
+        };
+    };
+
+    ['to','fromTo','set','from','killTweensOf'].forEach(wrap);
+})();
 
 // ---- SELECTORES ----
 const header = document.querySelector(".header");
@@ -62,9 +106,13 @@ function updateScroll() {
         if (menuTimeline) menuTimeline.timeScale(1.4).reverse();
         menuOpen = false;
         menuBtn.textContent = 'Menu';
-        menuTimeline.eventCallback("onReverseComplete", () => {
+        if (menuTimeline) {
+            menuTimeline.eventCallback("onReverseComplete", () => {
+                nav.classList.remove("open");
+            });
+        } else {
             nav.classList.remove("open");
-        });
+        }
     }
 
     lastScrollY = latestScrollY;
@@ -101,9 +149,13 @@ menuBtn.addEventListener("click", e => {
         if (menuTimeline) menuTimeline.timeScale(1.4).reverse();
         menuOpen = false;
         menuBtn.textContent = 'Menu';
-        menuTimeline.eventCallback("onReverseComplete", () => {
+        if (menuTimeline) {
+            menuTimeline.eventCallback("onReverseComplete", () => {
+                nav.classList.remove("open");
+            });
+        } else {
             nav.classList.remove("open");
-        });
+        }
     }
 });
 
@@ -113,9 +165,13 @@ document.addEventListener("click", () => {
     if (menuTimeline) menuTimeline.timeScale(1.4).reverse();
     menuOpen = false;
     menuBtn.textContent = 'Menu';
-    menuTimeline.eventCallback("onReverseComplete", () => {
+    if (menuTimeline) {
+        menuTimeline.eventCallback("onReverseComplete", () => {
+            nav.classList.remove("open");
+        });
+    } else {
         nav.classList.remove("open");
-    });
+    }
 });
 
 
@@ -140,6 +196,11 @@ function initAnimations() {
 
 // Ejecutar cuando cargue el DOM
 document.addEventListener("DOMContentLoaded", initAnimations);
+
+// Si el script se inyectó después del evento DOMContentLoaded, ejecutar de todos modos
+if (document.readyState === 'interactive' || document.readyState === 'complete') {
+    setTimeout(initAnimations, 0);
+}
 
 
 /* Fade-in genérico para cualquier elemento con la clase .fade-in */
@@ -442,24 +503,84 @@ navLinks.forEach(link => {
         e.preventDefault();
         e.stopPropagation();
 
-        const targetId = link.getAttribute("href");
-        const target = document.querySelector(targetId);
-        if (!target) return;
+        const href = link.getAttribute("href");
+        if (!href) return;
 
-        const scrollFunction = () => {
-            if (targetId === "#contacto") {
-                scrollToSectionCentered(target);
-            } else {
-                gsap.to(window, {
-                    duration: 0.8,
-                    scrollTo: {
-                        y: targetId,
-                        autoKill: false
-                    },
-                    ease: "power2.inOut"
+        // Si es un anchor local (empieza con '#'), hacemos scroll animado
+        if (href.startsWith('#')) {
+            const target = document.querySelector(href);
+            if (!target) return;
+
+            const scrollFunction = () => {
+                if (href === "#contacto") {
+                    scrollToSectionCentered(target);
+                } else {
+                    gsap.to(window, {
+                        duration: 0.8,
+                        scrollTo: {
+                            y: href,
+                            autoKill: false
+                        },
+                        ease: "power2.inOut"
+                    });
+                }
+            };
+
+            // bloqueamos comportamiento automático
+            isNavigatingViaMenu = true;
+
+            if (menuOpen && menuTimeline) {
+                // 1️⃣ cerramos primero los links del menú
+                menuTimeline.timeScale(1.6).reverse();
+                menuTimeline.eventCallback("onReverseComplete", () => {
+                    nav.classList.remove("open");
+                    menuOpen = false;
+                    menuBtn.textContent = "Menu";
+
+                    // 2️⃣ escondemos el header (fade + slide)
+                    hideHeaderCinematic();
+
+                    // 3️⃣ micro delay cinematográfico
+                    setTimeout(() => {
+                        scrollFunction();
+                    }, 220);
+
+                    // 4️⃣ liberamos control luego del scroll
+                    setTimeout(() => {
+                        isNavigatingViaMenu = false;
+                    }, 1100);
+
+                    // limpiamos callback
+                    menuTimeline.eventCallback("onReverseComplete", null);
                 });
+            } else {
+                // fallback (por si el menú no estaba abierto)
+                hideHeaderCinematic();
+                setTimeout(() => {
+                    scrollFunction();
+                }, 220);
+                setTimeout(() => {
+                    isNavigatingViaMenu = false;
+                }, 1100);
             }
-        };
+            return;
+        }
+
+        // Si no es un anchor interno, navegar a la URL (página separada)
+        // Aseguramos que el menú se cierre primero para UX consistente
+        if (menuOpen && menuTimeline) {
+            menuTimeline.timeScale(1.6).reverse();
+            menuTimeline.eventCallback("onReverseComplete", () => {
+                nav.classList.remove("open");
+                menuOpen = false;
+                menuBtn.textContent = "Menu";
+                hideHeaderCinematic();
+                window.location.href = href;
+            });
+        } else {
+            hideHeaderCinematic();
+            window.location.href = href;
+        }
 
         // 🔑 bloqueamos comportamiento automático
         isNavigatingViaMenu = true;

@@ -34,8 +34,8 @@ if (grainVideo) {
         <button class="menu-btn pill" id="menuBtn">Menu</button>
         <a class="contact-btn pill" id="contactBtn" href="#contacto">Contacto</a>
         <nav class="nav" id="navMenu">
-    <a class="pill" href="#bio">Bio</a>
-    <a class="pill" href="#tattoo">Tattoo</a>
+        <a class="pill" href="#bio">Bio</a>
+        <a class="pill" href="tattoo.html">Tattoo</a>
     <a class="pill" href="#ilustracion">Ilustración</a>
     <a class="pill" href="#pintura">Pintura</a>
     <a class="pill" href="#escultura">Escultura</a>
@@ -60,53 +60,55 @@ if (grainVideo) {
             </div>
         </section>
 
-        <section id="bio" class="section bg1">
-            <h2 class="bio-title">BIO</h2>
-            <div class="bio-wrapper">
-                <p>Soy un artista visual.</p>
-                <p>La creación es mi forma de expresión y el criterio, mi herramienta principal.</p>
-                <p>Trabajo en distintos lenguajes — tatuaje, ilustración, imagen, objeto — no como disciplinas separadas, sino como formas distintas de decir lo mismo.</p>
-                <p>Cada pieza parte de una idea, una intención y un proceso consciente.</p>
-                <p>El tiempo, la atención y la decisión importan tanto como el resultado. No improviso, no produzco en serie y no persigo tendencias.</p>
-                <p>El tatuaje es el lenguaje más directo de este mundo creativo: donde la idea, el cuerpo y la técnica se encuentran.</p>
+        <section id="bio" class="section summary-section">
+            <div class="summary-inner">
+                <h2 class="bio-title">BIO</h2>
+                <div class="bio-wrapper">
+                    <p>Soy un artista visual.</p>
+                    <p>La creación es mi forma de expresión y el criterio, mi herramienta principal.</p>
+                    <p>Trabajo en distintos lenguajes — tatuaje, ilustración, imagen, objeto — no como disciplinas separadas, sino como formas distintas de decir lo mismo.</p>
+                    <p>Cada pieza parte de una idea, una intención y un proceso consciente.</p>
+                    <p>El tiempo, la atención y la decisión importan tanto como el resultado. No improviso, no produzco en serie y no persigo tendencias.</p>
+                    <p>El tatuaje es el lenguaje más directo de este mundo creativo: donde la idea, el cuerpo y la técnica se encuentran.</p>
+                </div>
+
+                <h2 class="summary-title">Quién soy / Resumen</h2>
+                <p class="summary-intro">Artista visual. Trabajo en tatuaje, ilustración, pintura, escultura y fotografía. Abajo encontrarás un resumen rápido de cada área — clic para ver más.</p>
+
+                <div class="summary-grid">
+                    <a class="summary-card" href="tattoo.html">
+                        <h3>Tatuaje</h3>
+                        <p>El lenguaje más directo: idea, cuerpo y técnica.</p>
+                    </a>
+                    <a class="summary-card" href="ilustracion.html">
+                        <h3>Ilustración</h3>
+                        <p>Dibujo y narrativa visual en papel y digital.</p>
+                    </a>
+                    <a class="summary-card" href="pintura.html">
+                        <h3>Pintura</h3>
+                        <p>Obras pictóricas que exploran color y forma.</p>
+                    </a>
+                    <a class="summary-card" href="foto.html">
+                        <h3>Foto / Video</h3>
+                        <p>Documentación y piezas audiovisuales.</p>
+                    </a>
+                    <a class="summary-card" href="escultura.html">
+                        <h3>Escultura</h3>
+                        <p>Objetos y volumen como extensión del concepto.</p>
+                    </a>
+                    <a class="summary-card" href="tienda.html">
+                        <h3>Tienda</h3>
+                        <p>Impresiones, objetos y encargos disponibles.</p>
+                    </a>
+                </div>
             </div>
         </section>
 
-        <section id="tattoo" class="tattoo-section">
-            <div class="tattoo-bg layer-1"></div>
-            <div class="tattoo-bg layer-2"></div>
-            <div class="tattoo-arrows">
-                <div class="arrow left">&#10094;</div>
-                <div class="arrow right">&#10095;</div>
-            </div>
-            <div class="tattoo-content">
-                <div class="tattoo-meta">
-                    <div class="tattoo-overlay-text">
-                        <h3 class="tattoo-placeholder-title">TITLE PLACEHOLDER</h3>
-                        <p class="tattoo-placeholder-p">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae.
-                        </p>
-                    </div>
-                    <button class="tattoo-cta">
-                        Iniciar una consulta
-                    </button>
-                </div>
-                </div>
-        </section>
+        <!-- Tattoo section moved to tattoo.html (kept as separate page). -->
 
-        <section id="ilustracion" class="section bg3 scroll-reveal">
-    <h2 class="ilustracion-title">Ilustración</h2>
-    <div class="ilustracion-wrapper">
-        <p>Exploro el dibujo y la ilustración como lenguaje visual independiente.</p>
-        <p>Cada obra nace de un proceso consciente, combinando estilo, línea y composición.</p>
-        <p>Busco transmitir ideas y emociones a través de trazos y color.</p>
-    </div>
-</section>
-
-        <section id="pintura" class="section bg2 scroll-reveal">Pintura</section>
-        <section id="escultura" class="section bg5 scroll-reveal">Escultura</section>
-        <section id="foto" class="section bg4 scroll-reveal">Foto / Video</section>
-        <section id="tienda" class="section bg6 scroll-reveal">Tienda</section>
+        <!-- Las secciones Ilustración / Pintura / Escultura / Foto / Tienda
+             se han extraído a páginas separadas (ilustracion.html, pintura.html, escultura.html, foto.html, tienda.html)
+             para mantener el `index.html` como hub principal. -->
 
         <section id="contacto" class="section contact-section">
             <div class="contact-inner">
@@ -140,9 +142,6 @@ if (grainVideo) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
-<script src="js/main.js"></script>
-
-
  <script>
 (function waitForGSAP() {
   const maxRetries = 10;
@@ -164,6 +163,38 @@ if (grainVideo) {
   };
 
   checkGSAP();
+})();
+</script>
+<!-- Cargar main.js solo cuando GSAP esté disponible para evitar errores que dejen la página oculta -->
+<script>
+(function loadMainWhenGSAPReady() {
+    function injectMain() {
+        var s = document.createElement('script');
+        s.src = 'js/main.js';
+        s.defer = false;
+        document.body.appendChild(s);
+    }
+
+    if (window.gsap) {
+        injectMain();
+        return;
+    }
+
+    var attempts = 0;
+    var max = 35; // ~7s
+    var iv = setInterval(function() {
+        attempts++;
+        if (window.gsap) {
+            clearInterval(iv);
+            injectMain();
+        } else if (attempts >= max) {
+            clearInterval(iv);
+            document.documentElement.classList.add('no-gsap');
+            // Ensure page is visible even sin JS de animación
+            window.addEventListener('load', function() { document.body.classList.add('page-loaded'); });
+            console.warn('GSAP no cargó: main.js no se inyectó. Activando modo no-gsap.');
+        }
+    }, 200);
 })();
 </script>
   
