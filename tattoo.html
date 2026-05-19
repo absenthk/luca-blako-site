@@ -1,85 +1,106 @@
 <!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tattoo — Luca Blako</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300&family=Inter:wght@300;400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <script>document.documentElement.classList.add("js");</script>
 </head>
-<body>
-    <video class="grain-video" autoplay muted loop playsinline preload="auto">
-        <source src="assets/videos/noise-mp4-720.mp4" type="video/mp4">
-    </video>
-
+<body data-page="tattoo">
     <header class="header">
-        <a class="pill" href="index.html">Inicio</a>
         <button class="menu-btn pill" id="menuBtn">Menu</button>
         <a class="contact-btn pill" id="contactBtn" href="#contacto">Contacto</a>
+        <a class="pill" href="index.html">Inicio</a>
         <nav class="nav" id="navMenu">
             <a class="pill" href="index.html#bio">Bio</a>
             <a class="pill" href="tattoo.html">Tattoo</a>
-            <a class="pill" href="index.html#ilustracion">Ilustración</a>
-            <a class="pill" href="index.html#pintura">Pintura</a>
-            <a class="pill" href="index.html#escultura">Escultura</a>
-            <a class="pill" href="index.html#foto">Foto / Video</a>
-            <a class="pill" href="index.html#tienda">Tienda</a>
+            <a class="pill" href="ilustracion.html">Ilustración</a>
+            <a class="pill" href="pintura.html">Pintura</a>
+            <a class="pill" href="escultura.html">Escultura</a>
+            <a class="pill" href="foto.html">Foto / Video</a>
+            <a class="pill" href="tienda.html">Tienda</a>
         </nav>
     </header>
 
     <main>
-        <section id="tattoo" class="tattoo-section">
-            <div class="tattoo-bg layer-1"></div>
-            <div class="tattoo-bg layer-2"></div>
-            <div class="tattoo-arrows">
-                <div class="arrow left">&#10094;</div>
-                <div class="arrow right">&#10095;</div>
+        <section class="section" id="tattoo-hero" style="min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+            <video class="tattoo-hero-video" autoplay muted loop playsinline preload="auto" poster="/assets/images/Hero1.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+                <source src="assets/videos/tattoo/hero1.mp4" type="video/mp4">
+            </video>
+            <div style="position:relative;z-index:5;padding:2rem;text-align:center;color:#fff;">
+                <h1 class="hero-word name-luca">LUCA</h1>
+                <h1 class="hero-word name-blako">BLAKO</h1>
+                <p class="tagline">Artista tatuador — Nueva versión</p>
             </div>
-            <div class="tattoo-content">
-                <div class="tattoo-meta">
-                    <div class="tattoo-overlay-text">
-                        <h3 class="tattoo-placeholder-title">TITLE PLACEHOLDER</h3>
-                        <p class="tattoo-placeholder-p">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae.
-                        </p>
-                    </div>
-                    <button class="tattoo-cta">
-                        Iniciar una consulta
-                    </button>
+        </section>
+
+        <section class="section" id="tattoo-intro">
+            <div class="summary-inner">
+                <h2 class="bio-title">Tattoo — Introducción</h2>
+                <div class="bio-wrapper">
+                    <p>Aquí irá la introducción y el bio específico de tatuaje.</p>
                 </div>
+            </div>
+        </section>
+
+        <section class="section" id="tattoo-precios">
+            <div class="summary-inner">
+                <h2 class="bio-title">Precios</h2>
+                <p>Precios y condiciones — placeholder.</p>
+            </div>
+        </section>
+
+        <section class="section" id="tattoo-proceso">
+            <div class="summary-inner">
+                <h2 class="bio-title">Proceso</h2>
+                <p>Descripción del proceso de diseño y sesión.</p>
+            </div>
+        </section>
+
+        <section class="section" id="tattoo-contacto">
+            <div class="summary-inner">
+                <h2 class="bio-title">Contacto</h2>
+                <p>Enlace al contacto o CTA.</p>
+                <a class="pill" href="index.html#contacto">Contactar</a>
             </div>
         </section>
     </main>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
-<script src="js/main.js"></script>
-
-<script>
-(function waitForGSAP() {
-  const maxRetries = 10;
-  let attempts = 0;
-
-  const checkGSAP = () => {
-    if (window.gsap) {
-      console.log('GSAP cargado correctamente.');
-      return;
-    }
-
-    attempts++;
-    if (attempts >= maxRetries) {
-      document.documentElement.classList.add('no-gsap');
-      console.warn('GSAP no cargó → activando modo failsafe');
-    } else {
-      setTimeout(checkGSAP, 200);
-    }
-  };
-
-  checkGSAP();
-})();
-</script>
+    <script>
+    // Minimal page JS fallback for tattoo page: ensure visible and basic menu/contact behavior
+    document.addEventListener('DOMContentLoaded', function(){
+        try {
+            document.body.classList.add('page-loaded');
+        } catch(e){}
+        var menuBtn = document.getElementById('menuBtn');
+        var nav = document.getElementById('navMenu');
+        var contactBtn = document.getElementById('contactBtn');
+        if (menuBtn && nav) {
+            menuBtn.addEventListener('click', function(e){
+                e.stopPropagation();
+                nav.classList.toggle('open');
+                menuBtn.textContent = nav.classList.contains('open') ? 'Cerrar' : 'Menu';
+            });
+            document.addEventListener('click', function(){
+                if (nav.classList.contains('open')) {
+                    nav.classList.remove('open');
+                    if (menuBtn) menuBtn.textContent = 'Menu';
+                }
+            });
+        }
+        if (contactBtn) {
+            contactBtn.addEventListener('click', function(e){
+                // allow normal anchor behavior to #contacto
+            });
+        }
+    });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+    <script src="js/main.js"></script>
 
 </body>
 </html>

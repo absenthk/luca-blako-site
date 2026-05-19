@@ -74,14 +74,6 @@ const bioSection = document.getElementById("bio");
 const bioTitle = document.querySelector(".bio-title");
 const bioWrapper = document.querySelector(".bio-wrapper");
 
-const tattooSection = document.getElementById("tattoo");
-const tattooOverlayText = document.querySelector(".tattoo-overlay-text");
-const placeholderTitle = document.querySelector(".tattoo-placeholder-title");
-const tattooBgLayer1 = document.querySelector(".tattoo-bg.layer-1");
-const tattooBgLayer2 = document.querySelector(".tattoo-bg.layer-2");
-const arrowLeft = document.querySelector(".arrow.left");
-const arrowRight = document.querySelector(".arrow.right");
-
 const openContactFormBtn = document.getElementById("openContactForm");
 
 
@@ -105,7 +97,7 @@ function updateScroll() {
     if (menuOpen && scrollDelta > SCROLL_TOLERANCE) {
         if (menuTimeline) menuTimeline.timeScale(1.4).reverse();
         menuOpen = false;
-        menuBtn.textContent = 'Menu';
+        if (menuBtn) menuBtn.textContent = 'Menu';
         if (menuTimeline) {
             menuTimeline.eventCallback("onReverseComplete", () => {
                 nav.classList.remove("open");
@@ -136,19 +128,20 @@ window.addEventListener('scroll', () => {
 // ---------------------------
 
 // Abrir / cerrar
-menuBtn.addEventListener("click", e => {
+if (menuBtn) {
+    menuBtn.addEventListener("click", e => {
     e.stopPropagation();
     if (!menuOpen) {
         // ABRIR
         nav.classList.add("open");
         menuOpen = true;
-        menuBtn.textContent = 'Cerrar';
+            if (menuBtn) menuBtn.textContent = 'Cerrar';
         if (menuTimeline) menuTimeline.timeScale(1).play();
     } else {
         // CERRAR
         if (menuTimeline) menuTimeline.timeScale(1.4).reverse();
         menuOpen = false;
-        menuBtn.textContent = 'Menu';
+            if (menuBtn) menuBtn.textContent = 'Menu';
         if (menuTimeline) {
             menuTimeline.eventCallback("onReverseComplete", () => {
                 nav.classList.remove("open");
@@ -164,7 +157,7 @@ document.addEventListener("click", () => {
     if (!menuOpen) return;
     if (menuTimeline) menuTimeline.timeScale(1.4).reverse();
     menuOpen = false;
-    menuBtn.textContent = 'Menu';
+    if (menuBtn) menuBtn.textContent = 'Menu';
     if (menuTimeline) {
         menuTimeline.eventCallback("onReverseComplete", () => {
             nav.classList.remove("open");
@@ -173,11 +166,11 @@ document.addEventListener("click", () => {
         nav.classList.remove("open");
     }
 });
-
+}
 
 /* =========================================================
-   Inicializador global
-   ========================================================= */
+    Inicializador global
+    ========================================================= */
 function initAnimations() {
     initScrollAnimations();
     initCarouselAnimation();
@@ -413,47 +406,7 @@ function setupHeroEffects() {
 }
 
 
-// ---------------------------
-// IMAGES (Datos del Carrusel)
-// ---------------------------
-const tattooImages = [
-    "assets/images/carrousel-1.jpg",
-    "assets/images/carrousel-2.jpg",
-    "assets/images/carrousel-3.jpg",
-    "assets/images/carrousel-4.jpg",
-    "assets/images/carrousel-5.jpg",
-    "assets/images/carrousel-6.jpg"
-];
-
-const tattooTexts = [{
-        title: "Tatuajes pensados, no improvisados",
-        description: "Cada decisión tiene un porqué.."
-    },
-    {
-        title: "Cada proyecto es distinto",
-        description: "La idea se define en persona, escuchando y ajustando lo necesario."
-    },
-    {
-        title: "Trabajo con personas que entienden el valor del proceso",
-        description: "No es una elección apurada ni un diseño genérico."
-    },
-    {
-        title: "El diseño se construye con criterio",
-        description: "Líneas, proporciones y estilo se trabajan hasta que está listo."
-    },
-    {
-        title: "Se realiza en estudio profesional",
-        description: "con planificación, atención total y foco en tu comodidad."
-    },
-    {
-        title: "Si este enfoque resuena con vos",
-        description: "El primer paso es una consulta."
-    }
-];
-
-let tattooIndex = 0;
-let isAnimating = false;
-let autoplayTimer = null;
+// Tattoo carousel data removed — clean start
 
 
 // ---------------------------
@@ -506,24 +459,7 @@ navLinks.forEach(link => {
         const href = link.getAttribute("href");
         if (!href) return;
 
-        // Special-case: if the menu link points to the separate tattoo page,
-        // navigate immediately (ensures menu->tattoo always works)
-        if (href === 'tattoo.html' || href.endsWith('/tattoo.html')) {
-            if (menuOpen && menuTimeline) {
-                menuTimeline.timeScale(1.6).reverse();
-                menuTimeline.eventCallback("onReverseComplete", () => {
-                    nav.classList.remove("open");
-                    menuOpen = false;
-                    menuBtn.textContent = "Menu";
-                    hideHeaderCinematic();
-                    window.location.href = href;
-                });
-            } else {
-                hideHeaderCinematic();
-                window.location.href = href;
-            }
-            return;
-        }
+            // Normal navigation behavior (removed special-case for tattoo.html)
 
         // Si es un anchor local (empieza con '#'), hacemos scroll animado
         if (href.startsWith('#')) {
@@ -554,7 +490,7 @@ navLinks.forEach(link => {
                 menuTimeline.eventCallback("onReverseComplete", () => {
                     nav.classList.remove("open");
                     menuOpen = false;
-                    menuBtn.textContent = "Menu";
+                    if (menuBtn) menuBtn.textContent = "Menu";
 
                     // 2️⃣ escondemos el header (fade + slide)
                     hideHeaderCinematic();
@@ -592,7 +528,7 @@ navLinks.forEach(link => {
             menuTimeline.eventCallback("onReverseComplete", () => {
                 nav.classList.remove("open");
                 menuOpen = false;
-                menuBtn.textContent = "Menu";
+                if (menuBtn) menuBtn.textContent = "Menu";
                 hideHeaderCinematic();
                 window.location.href = href;
             });
@@ -610,7 +546,7 @@ navLinks.forEach(link => {
             menuTimeline.eventCallback("onReverseComplete", () => {
                 nav.classList.remove("open");
                 menuOpen = false;
-                menuBtn.textContent = "Menu";
+                if (menuBtn) menuBtn.textContent = "Menu";
 
                 // 2️⃣ escondemos el header (fade + slide)
                 hideHeaderCinematic();
@@ -688,31 +624,8 @@ function animateHeroText() {
 // BIO → ENTRADA / SALIDA SUAVE
 // =============================
 function setupBioToTattooTransition() {
-    if (!bioSection) return;
-    const bioParagraphs = document.querySelectorAll(".bio-wrapper p");
-    const bioElements = [bioTitle, ...bioParagraphs];
-
-    // ── ESTADO BASE ──
-    gsap.set(bioElements, {
-        opacity: 0,
-        y: 60,
-        filter: "blur(18px)"
-    });
-
-    // ── ENTRADA + SALIDA con scroll directo ──
-    gsap.to(bioElements, {
-        opacity: 1,
-        y: 0,
-        filter: "blur(0px)",
-        stagger: 0.15,
-        ease: "none", // sin easing para que siga el scroll
-        scrollTrigger: {
-            trigger: bioSection,
-            start: "top 90%", // empieza cuando entra
-            end: "bottom 80%", // termina cuando sale
-            scrub: true // clave para que la animación siga el scroll
-        }
-    });
+    // Removed tattoo-specific transition. No-op.
+    return;
 }
 
 
@@ -721,388 +634,21 @@ function setupBioToTattooTransition() {
 // TATTOO — ENTRADA / SALIDA LIMPIA (SIN TÍTULO)
 // =========================================
 function setupTattooEntrance() {
-    const tattooSection = document.querySelector(".tattoo-section");
-    const tattooBg = document.querySelector(".tattoo-bg.layer-2");
-    const tattooText = document.querySelector(".tattoo-overlay-text");
-    const tattooCTA = document.querySelector('.tattoo-cta');
-
-    if (!tattooSection || !tattooBg || !tattooText) return;
-
-    // Estado base
-    gsap.set(tattooBg, {
-        scale: 1.15
-    });
-    gsap.set(tattooText, {
-        opacity: 0,
-        y: 100,
-        filter: "blur(20px)"
-    });
-
-    // Ensure CTA participates in the same enter/exit motion (we won't force its opacity here,
-    // the carousel logic controls visibility — this keeps its movement in sync with the text)
-    if (tattooCTA) {
-        gsap.set(tattooCTA, {
-            y: 100,
-            // filter: "blur(20px)", // 🛑 REMOVED BLUR
-            opacity: 0
-        });
-    }
-
-    gsap.timeline({
-            scrollTrigger: {
-                trigger: tattooSection,
-                start: "top 65%",
-                end: "bottom 30%",
-                scrub: true,
-                // When the section leaves the viewport hide the CTA regardless of slide
-                onLeave: () => {
-                    if (tattooCTA) {
-                        gsap.to(tattooCTA, {
-                            opacity: 0,
-                            y: -20,
-                            duration: 0.15,
-                            pointerEvents: 'none'
-                        });
-                    }
-                },
-                onLeaveBack: () => {
-                    if (tattooCTA) {
-                        gsap.to(tattooCTA, {
-                            opacity: 0,
-                            y: -20,
-                            duration: 0.15,
-                            pointerEvents: 'none'
-                        });
-                    }
-                },
-                // When entering the section, only show CTA if we're on the last slide
-                onEnter: () => {
-                    if (tattooCTA && tattooIndex === tattooTexts.length - 1) {
-                        gsap.to(tattooCTA, {
-                            opacity: 1,
-                            y: 0,
-                            duration: 0.15,
-                            pointerEvents: 'auto'
-                        });
-                    }
-                },
-                onEnterBack: () => {
-                    if (tattooCTA && tattooIndex === tattooTexts.length - 1) {
-                        gsap.to(tattooCTA, {
-                            opacity: 1,
-                            y: 0,
-                            duration: 0.15,
-                            pointerEvents: 'auto'
-                        });
-                    }
-                },
-                // Drive CTA opacity from the scroll progress so it fades in/out like the text
-                onUpdate: (self) => {
-                    if (!tattooCTA) return;
-                    const p = self.progress; // 0..1 across start..end
-                    // Adjusted ramps so CTA appears a bit later and disappears earlier
-                    // New profile: appear ramp between 0.25..0.45, hold until 0.60, disappear ramp 0.60..0.75
-                    const enterStart = 0.25;
-                    const enterEnd = 0.45;
-                    const holdEnd = 0.60;
-                    const exitEnd = 0.75;
-
-                    let op = 0;
-                    if (p <= enterStart) op = 0;
-                    else if (p <= enterEnd) op = (p - enterStart) / (enterEnd - enterStart);
-                    else if (p <= holdEnd) op = 1;
-                    else if (p <= exitEnd) op = Math.max(0, 1 - (p - holdEnd) / (exitEnd - holdEnd));
-                    else op = 0;
-
-                    // 🛑 REMOVED DYNAMIC BLUR CALCULATION
-                    // const maxBlur = 14; // px
-                    // const blurPx = Math.max(0, (1 - op) * maxBlur);
-
-                    if (tattooIndex === tattooTexts.length - 1) {
-                        // only show when we're on the last slide
-                        gsap.set(tattooCTA, {
-                            opacity: op,
-                            // filter: `blur(${blurPx}px)`, // 🛑 REMOVED
-                            pointerEvents: op > 0.05 ? 'auto' : 'none'
-                        });
-                    } else {
-                        gsap.set(tattooCTA, {
-                            opacity: 0,
-                            // filter: `blur(${maxBlur}px)`, // 🛑 REMOVED
-                            pointerEvents: 'none'
-                        });
-                    }
-                }
-            }
-        })
-        // Fondo
-        .to(tattooBg, {
-            scale: 1,
-            ease: "none"
-        }, 0)
-        // Texto editorial
-        .to(tattooText, {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            ease: "power2.out"
-        }, 0.2)
-        // Make CTA follow the same entrance/exit vertical motion (no opacity override)
-        .to(tattooCTA ? tattooCTA : {}, {
-            y: 0,
-            ease: "power2.out"
-        }, 0.2)
-
-        // Salida suave
-        .to(tattooText, {
-            opacity: 0,
-            y: -60,
-            filter: "blur(14px)",
-            ease: "power2.in"
-        }, 0.75)
-        .to(tattooCTA ? tattooCTA : {}, {
-            y: -60,
-            ease: "power2.in"
-        }, 0.75)
-        // Eco visual del fondo
-        .to(tattooBg, {
-            scale: 1.1,
-            ease: "none"
-        }, 0.75);
+    // Removed tattoo entrance logic. No-op.
+    return;
 }
 
 
 // =========================================
 // TATTOO — FADE CINEMATOGRÁFICO (SUAVE + ESTABLE)
 // =========================================
-function setupTattooSectionFade() {
-    if (!tattooSection) return;
-
-    // Estado base
-    gsap.set(tattooSection, {
-        opacity: 0
-    });
-
-    gsap.to(tattooSection, {
-        opacity: 1,
-        ease: "none",
-        scrollTrigger: {
-            trigger: tattooSection,
-            start: "top 95%", // empieza antes
-            end: "top 40%", // termina mucho después
-            scrub: 1 // scrub suave (no inmediato)
-        }
-    });
-}
+function setupTattooSectionFade() { return; }
 
 
 // ---------------------------
 // TATTOO CAROUSEL
 // ---------------------------
-function initTattooCarousel() {
-    if (!tattooBgLayer1 || !tattooBgLayer2) return;
-
-    const pElement = document.querySelector(".tattoo-placeholder-p");
-    const tattooCTA = document.querySelector(".tattoo-cta");
-
-    gsap.set([tattooBgLayer1, tattooBgLayer2], {
-        opacity: 1,
-        x: 0
-    });
-    tattooBgLayer1.style.backgroundImage = `url('${tattooImages[0]}')`;
-    tattooBgLayer2.style.backgroundImage = `url('${tattooImages[0]}')`;
-
-    // Create pagination dots
-    let dotsContainer = document.querySelector('.carousel-dots');
-    if (!dotsContainer) {
-        dotsContainer = document.createElement('div');
-        dotsContainer.className = 'carousel-dots';
-        // append to tattooSection container so positioning is correct
-        const container = document.querySelector('.tattoo-content') || document.getElementById('tattoo');
-        container.appendChild(dotsContainer);
-    }
-
-    dotsContainer.innerHTML = '';
-    tattooImages.forEach((_, i) => {
-        const dot = document.createElement('button');
-        dot.className = 'dot';
-        dot.setAttribute('aria-label', `Ir a slide ${i+1}`);
-        dot.addEventListener('click', () => {
-            if (i === tattooIndex) return;
-            // direct jump to selected slide
-            tattooIndex = i;
-            tattooBgLayer1.style.backgroundImage = `url('${tattooImages[i]}')`;
-            tattooBgLayer2.style.backgroundImage = `url('${tattooImages[i]}')`;
-            updateTattooContent(i);
-            setActiveDot(i);
-        });
-        dotsContainer.appendChild(dot);
-    });
-
-    function setActiveDot(idx) {
-        const dots = dotsContainer.querySelectorAll('.dot');
-        dots.forEach((d, j) => d.classList.toggle('active', j === idx));
-    }
-
-
-    // ── UPDATE DE CONTENIDO ─────────────────
-    function updateTattooContent(index) {
-        if (placeholderTitle) placeholderTitle.textContent = tattooTexts[index].title;
-        if (pElement) pElement.textContent = tattooTexts[index].description;
-
-        // CTA → solo último slide
-        if (tattooCTA) {
-            if (index === tattooTexts.length - 1) {
-                gsap.to(tattooCTA, {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.4,
-                    ease: "power2.out",
-                    pointerEvents: "auto"
-                });
-            } else {
-                gsap.to(tattooCTA, {
-                    opacity: 0,
-                    y: 20,
-                    duration: 0.3,
-                    ease: "power2.in",
-                    pointerEvents: "none"
-                });
-            }
-        }
-        setActiveDot(index);
-    }
-    updateTattooContent(tattooIndex);
-
-
-    // ── SWITCH DE IMAGEN ────────────────────
-    function switchTattooImage(direction) {
-        if (isAnimating) return;
-        isAnimating = true;
-
-        const nextIndex = (tattooIndex + direction + tattooImages.length) % tattooImages.length;
-        tattooBgLayer1.style.backgroundImage = `url('${tattooImages[nextIndex]}')`;
-
-        gsap.killTweensOf([placeholderTitle, pElement, tattooCTA]);
-
-        // Salida del texto
-        gsap.to([placeholderTitle, pElement], {
-            opacity: 0,
-            y: direction > 0 ? -20 : 20,
-            filter: "blur(8px)",
-            duration: 0.3,
-            ease: "power2.out"
-        });
-
-        if (tattooCTA) {
-            gsap.to(tattooCTA, {
-                opacity: 0,
-                y: 20,
-                duration: 0.25,
-                pointerEvents: "none"
-            });
-        }
-
-        // Transición del fondo
-        gsap.to(tattooBgLayer2, {
-            x: direction > 0 ? "-100%" : "100%",
-            scale: 0.95,
-            opacity: 0.8,
-            duration: 0.7,
-            ease: "power3.inOut",
-            onComplete: () => {
-                gsap.set(tattooBgLayer2, {
-                    backgroundImage: tattooBgLayer1.style.backgroundImage,
-                    x: 0,
-                    scale: 1,
-                    opacity: 1
-                });
-                tattooIndex = nextIndex;
-                updateTattooContent(tattooIndex);
-
-                // Entrada del título
-                gsap.to(placeholderTitle, {
-                    opacity: 1,
-                    y: 0,
-                    filter: "blur(0px)",
-                    duration: 0.25,
-                    ease: "power3.out"
-                });
-
-                // Entrada del párrafo
-                gsap.to(pElement, {
-                    opacity: 1,
-                    y: 0,
-                    filter: "blur(0px)",
-                    duration: 0.25,
-                    ease: "power3.out",
-                    delay: 0.1
-                });
-
-                isAnimating = false;
-            }
-        });
-    }
-
-
-    // -------------------------------
-    // Flechas
-    // -------------------------------
-    arrowLeft?.addEventListener("click", () => switchTattooImage(-1));
-    arrowRight?.addEventListener("click", () => switchTattooImage(1));
-
-
-    // -------------------------------
-    // LÓGICA DE SWIPE
-    // -------------------------------
-    let touchstartX = 0;
-    let touchstartY = 0;
-    let isSwiping = false;
-    const swipeThreshold = 50;
-
-    function handleTouchStart(e) {
-        if (isAnimating) return;
-        touchstartX = e.changedTouches[0].screenX;
-        touchstartY = e.changedTouches[0].screenY;
-        isSwiping = false;
-    }
-
-    function handleTouchMove(e) {
-        if (isAnimating) return;
-        const currentX = e.changedTouches[0].screenX;
-        const currentY = e.changedTouches[0].screenY;
-        const deltaX = currentX - touchstartX;
-        const deltaY = currentY - touchstartY;
-
-        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
-            e.preventDefault();
-            isSwiping = true;
-        }
-    }
-
-    function handleTouchEnd(e) {
-        if (isAnimating) return;
-        const deltaX = e.changedTouches[0].screenX - touchstartX;
-        if (Math.abs(deltaX) > swipeThreshold) {
-            if (deltaX < 0) switchTattooImage(1);
-            else switchTattooImage(-1);
-        }
-    }
-
-    tattooSection?.addEventListener("touchstart", handleTouchStart, {
-        passive: false
-    });
-    tattooSection?.addEventListener("touchmove", handleTouchMove, {
-        passive: false
-    });
-    tattooSection?.addEventListener("touchend", handleTouchEnd);
-
-
-    // ── CTA → CONTACTO ──────────────────────
-    tattooCTA?.addEventListener("click", () => {
-        scrollToSectionCentered(document.querySelector("#contacto"));
-    });
-}
+function initTattooCarousel() { return; }
 
 // init the hint when DOM ready (removed — using pagination dots instead)
 openContactFormBtn?.addEventListener("click", () => {
