@@ -14,7 +14,6 @@
         <a class="contact-btn pill" id="contactBtn" href="#contacto">Contacto</a>
         <a class="pill" href="index.html">Inicio</a>
         <nav class="nav" id="navMenu">
-            <a class="pill" href="index.html#bio">Bio</a>
             <a class="pill" href="tattoo.html">Tattoo</a>
             <a class="pill" href="ilustracion.html">Ilustración</a>
             <a class="pill" href="pintura.html">Pintura</a>
@@ -25,74 +24,114 @@
     </header>
 
     <main>
-        <section class="section" id="tattoo-hero" style="min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
-            <video class="tattoo-hero-video" autoplay muted loop playsinline preload="auto" poster="/assets/images/Hero1.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+        <section class="hero" id="hero">
+            <video id="heroImageLayer" class="hero-image-layer" autoplay muted loop playsinline preload="auto" poster="/assets/images/Hero1.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
                 <source src="assets/videos/tattoo/hero1.mp4" type="video/mp4">
             </video>
-            <div style="position:relative;z-index:5;padding:2rem;text-align:center;color:#fff;">
-                <h1 class="hero-word name-luca">LUCA</h1>
-                <h1 class="hero-word name-blako">BLAKO</h1>
-                <p class="tagline">Artista tatuador — Nueva versión</p>
+            <div class="hero-text">
+                <div class="hero-text-content">
+                    <div id="hero-sequence">
+                        <span class="hero-word name-blako">BLAKO</span>
+                        <span class="hero-word name-luca">TATTOO</span>
+                        <span class="hero-word tagline">Artista tatuador</span>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section class="section" id="tattoo-intro">
+        <!-- Tattoo content: bio, why, precios, clientes, proceso, CTA -->
+        <section class="section" id="tattoo-about">
             <div class="summary-inner">
-                <h2 class="bio-title">Tattoo — Introducción</h2>
-                <div class="bio-wrapper">
-                    <p>Aquí irá la introducción y el bio específico de tatuaje.</p>
-                </div>
+                <h2 class="contact-title">Soy Luca, artista visual y tatuador desde 2017.</h2>
+                <p class="contact-intro">Dibujo desde que tengo memoria, pero encontré en el tatuaje una forma más directa y duradera de conectar con la gente.</p>
+
+                <h3 class="contact-sub">No hago tatuajes al azar.</h3>
+                <p class="contact-sub">Creo piezas oscuras, intensas y únicas, con inspiración en lo mitológico, lo simbólico y lo personal. Desde Buenos Aires, para el mundo.</p>
+
+                <h3 class="contact-sub">¿Por qué tatuarte conmigo?</h3>
+                <p class="contact-sub">Cada tatuaje es una obra única. Pensada para vos, para que represente tu historia y energía.</p>
+                <p class="contact-sub">No repito ideas ni diseño sobre la marcha: planifico y creo desde la intención.</p>
             </div>
         </section>
 
         <section class="section" id="tattoo-precios">
             <div class="summary-inner">
                 <h2 class="bio-title">Precios</h2>
-                <p>Precios y condiciones — placeholder.</p>
+                <p class="contact-sub">Un buen tatuaje no es barato. Y un tatuaje barato… no suele durar.</p>
+                <p class="contact-sub">Diseños chicos desde $70.000 y sesiones de 2hs desde $199.000.</p>
+                <p class="contact-sub">Cada proyecto se cotiza según idea, tamaño y complejidad.</p>
+            </div>
+        </section>
+
+        <section class="section" id="tattoo-clientes">
+            <div class="summary-inner">
+                <h2 class="bio-title">¿Qué tipo de clientes busco?</h2>
+                <p class="contact-sub">Trabajo con personas que aman el arte, que ya saben lo que implica tatuarse y que quieren ir un paso más allá.</p>
+                <p class="contact-sub">No buscan un tatuaje “lindo”. Buscan algo con peso, con carácter.</p>
             </div>
         </section>
 
         <section class="section" id="tattoo-proceso">
             <div class="summary-inner">
-                <h2 class="bio-title">Proceso</h2>
-                <p>Descripción del proceso de diseño y sesión.</p>
+                <h2 class="bio-title">¿Cómo será el proceso?</h2>
+                <ol class="contact-sub">
+                    <li>Charlamos tu idea por mensaje o consulta presencial.</li>
+                    <li>Te cotizo el proyecto y coordinamos fecha.</li>
+                    <li>Diseño tu pieza con anticipación. Podés verla y hacer ajustes antes de tatuar.</li>
+                    <li>Durante la sesión, te acompaño con profesionalismo y cuidado.</li>
+                    <li>Te llevás el diseño, stickers y una guía de curado. Ofrezco seguimiento para ver cómo cicatriza tu tatuaje.</li>
+                </ol>
+                <p class="contact-intro">Tatuajes con identidad. Cada pieza está diseñada desde la intención, con peso simbólico y visual.</p>
+                <p class="contact-intro">¿Estás listx para el próximo tatuaje? Escribime y contame tu idea. Agendá una consulta sin compromiso.</p>
             </div>
         </section>
 
-        <section class="section" id="tattoo-contacto">
-            <div class="summary-inner">
-                <h2 class="bio-title">Contacto</h2>
-                <p>Enlace al contacto o CTA.</p>
-                <a class="pill" href="index.html#contacto">Contactar</a>
+        <section id="contacto" class="section contact-section">
+            <div class="contact-inner">
+                <h2 class="contact-title">CONTACTO</h2>
+                <p class="contact-intro">
+                    Si querés empezar un proyecto,<br> el primer paso es una consulta.
+                </p>
+                <p class="contact-sub">
+                    No es un compromiso ni una reserva inmediata.<br> Es una conversación para entender la idea y ver cómo seguir.
+                </p>
+                <p class="contact-sub contact-sub-last">
+                    Trabajo desde estudio privado en Buenos Aires.
+                </p>
+                <button class="contact-cta" id="openContactForm">
+                    Agendá tu consulta
+                </button>
+                <div class="contact-alt">
+                    <span>También podés escribirme por:</span>
+                    <div class="contact-links">
+                        <a href="https://instagram.com/TUUSUARIO" target="_blank">Instagram</a>
+                        <a href="mailto:tuemail@email.com">Email</a>
+                    </div>
+                </div>
+                <p class="contact-note">
+                    Respondo con calma.<br> Si no es inmediato, es parte del proceso.
+                </p>
+                <div class="contact-location">
+                    <h3 class="contact-sub">Encontrame en Acassuso — Zona Norte</h3>
+                    <p class="contact-sub">Av. Santa Fe 910, Acassuso, Buenos Aires</p>
+                    <div class="map-wrapper" style="margin-top:1rem;">
+                        <iframe
+                            src="https://www.google.com/maps?q=Av%20Santa%20Fe%20910%20Acassuso%20Buenos%20Aires&output=embed"
+                            width="100%" height="280" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
     <script>
-    // Minimal page JS fallback for tattoo page: ensure visible and basic menu/contact behavior
+    // Minimal page JS fallback: only ensure visual "page-loaded" class and contact button safe hook.
     document.addEventListener('DOMContentLoaded', function(){
-        try {
-            document.body.classList.add('page-loaded');
-        } catch(e){}
-        var menuBtn = document.getElementById('menuBtn');
-        var nav = document.getElementById('navMenu');
+        try { document.body.classList.add('page-loaded'); } catch(e){}
         var contactBtn = document.getElementById('contactBtn');
-        if (menuBtn && nav) {
-            menuBtn.addEventListener('click', function(e){
-                e.stopPropagation();
-                nav.classList.toggle('open');
-                menuBtn.textContent = nav.classList.contains('open') ? 'Cerrar' : 'Menu';
-            });
-            document.addEventListener('click', function(){
-                if (nav.classList.contains('open')) {
-                    nav.classList.remove('open');
-                    if (menuBtn) menuBtn.textContent = 'Menu';
-                }
-            });
-        }
         if (contactBtn) {
             contactBtn.addEventListener('click', function(e){
-                // allow normal anchor behavior to #contacto
+                // normal anchor behavior to #contacto preserved
             });
         }
     });

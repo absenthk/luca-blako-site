@@ -420,6 +420,7 @@ html.no-gsap .grain-video {
     max-width: 1100px;
     width: 100%;
     text-align: center;
+    margin: 0 auto;
 }
 .summary-title {
     font-family: 'Oswald', sans-serif;
@@ -458,3 +459,47 @@ html.no-gsap .grain-video {
 }
 .summary-card h3 { margin: 0 0 .4rem 0; font-family: 'Oswald', sans-serif; font-weight:200; letter-spacing:.12em; }
 .summary-card p { margin: 0; font-size: .92rem; opacity: .9; }
+
+/* ===== Tattoo page overrides: more compact sections and centered content ===== */
+#tattoo-about .summary-inner,
+#tattoo-precios .summary-inner,
+#tattoo-clientes .summary-inner,
+#tattoo-proceso .summary-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#tattoo-about,
+#tattoo-precios,
+#tattoo-clientes,
+#tattoo-proceso {
+    min-height: auto; /* avoid huge full-screen gaps */
+    padding: 2rem 1.2rem;
+}
+
+/* Make the about section transparent so its text overlays the sticky hero video */
+#tattoo-about {
+    background: transparent;
+}
+
+/* Remove black background from precios and clientes sections so video shows through */
+#tattoo-precios,
+#tattoo-clientes {
+    background: transparent;
+}
+
+/* tattoo-about overlay removed; using default section flow to match homepage behavior */
+
+#tattoo-about p,
+#tattoo-precios p,
+#tattoo-clientes p,
+#tattoo-proceso p {
+    margin-bottom: 1rem; /* tighter spacing between paragraphs */
+}
+
+/* Ensure contact-inner remains centered on tattoo page as well */
+#contacto .contact-inner {
+    max-width: 820px;
+    margin: 0 auto;
+}

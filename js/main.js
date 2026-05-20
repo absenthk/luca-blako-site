@@ -334,7 +334,7 @@ function setupSmartHeader() {
 // ---------------------------
 
 function setupHeroEffects() {
-    if (!hero || !heroText || !heroTextContent || !bioSection || !heroImageLayer) return;
+    if (!hero || !heroText || !heroTextContent || !heroImageLayer) return;
 
     const heroWords = document.querySelectorAll(".hero-word");
     const heroHeight = hero.offsetHeight || window.innerHeight;
