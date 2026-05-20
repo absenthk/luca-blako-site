@@ -147,13 +147,7 @@ function initAnimations() {
 
 }
 
-// Ejecutar cuando cargue el DOM
-document.addEventListener("DOMContentLoaded", initAnimations);
-
-// Si el script se inyectó después del evento DOMContentLoaded, ejecutar de todos modos
-if (document.readyState === 'interactive' || document.readyState === 'complete') {
-    setTimeout(initAnimations, 0);
-}
+initAnimations();
 
 
 /* Fade-in genérico para cualquier elemento con la clase .fade-in */
