@@ -25,9 +25,21 @@
 
     <main>
         <section class="hero" id="hero">
-            <video id="heroImageLayer" class="hero-image-layer" autoplay muted loop playsinline preload="auto" poster="/assets/images/Hero1.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+            <video id="heroImageLayer" class="hero-image-layer" autoplay muted loop playsinline preload="auto" poster="/assets/images/Hero1.jpg" disablePictureInPicture controlsList="nodownload noremoteplayback" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
                 <source src="assets/videos/tattoo/hero1.mp4" type="video/mp4">
             </video>
+            <script>
+                // Force-disable Picture-in-Picture for the hero video (extra defensive)
+                (function(){
+                    var v = document.getElementById('heroImageLayer');
+                    try {
+                        if (v) {
+                            v.disablePictureInPicture = true;
+                            v.disableRemotePlayback = true;
+                        }
+                    } catch(e){}
+                })();
+            </script>
             <div class="hero-text">
                 <div class="hero-text-content">
                     <div id="hero-sequence">
@@ -74,13 +86,11 @@
         <section class="section" id="tattoo-proceso">
             <div class="summary-inner">
                 <h2 class="bio-title">¿Cómo será el proceso?</h2>
-                <ol class="contact-sub">
-                    <li>Charlamos tu idea por mensaje o consulta presencial.</li>
-                    <li>Te cotizo el proyecto y coordinamos fecha.</li>
-                    <li>Diseño tu pieza con anticipación. Podés verla y hacer ajustes antes de tatuar.</li>
-                    <li>Durante la sesión, te acompaño con profesionalismo y cuidado.</li>
-                    <li>Te llevás el diseño, stickers y una guía de curado. Ofrezco seguimiento para ver cómo cicatriza tu tatuaje.</li>
-                </ol>
+                <p class="contact-sub">Charlamos tu idea por mensaje o consulta presencial.</p>
+                <p class="contact-sub">Te cotizo el proyecto y coordinamos fecha.</p>
+                <p class="contact-sub">Diseño tu pieza con anticipación. Podés verla y hacer ajustes antes de tatuar.</p>
+                <p class="contact-sub">Durante la sesión, te acompaño con profesionalismo y cuidado.</p>
+                <p class="contact-sub">Te llevás el diseño, stickers y una guía de curado. Ofrezco seguimiento para ver cómo cicatriza tu tatuaje.</p>
                 <p class="contact-intro">Tatuajes con identidad. Cada pieza está diseñada desde la intención, con peso simbólico y visual.</p>
                 <p class="contact-intro">¿Estás listx para el próximo tatuaje? Escribime y contame tu idea. Agendá una consulta sin compromiso.</p>
             </div>
@@ -104,8 +114,8 @@
                 <div class="contact-alt">
                     <span>También podés escribirme por:</span>
                     <div class="contact-links">
-                        <a href="https://instagram.com/TUUSUARIO" target="_blank">Instagram</a>
-                        <a href="mailto:tuemail@email.com">Email</a>
+                        <a href="https://instagram.com/blako.ttt" target="_blank">Instagram</a>
+                        <a href="blako.visualart@email.com">Email</a>
                     </div>
                 </div>
                 <p class="contact-note">
