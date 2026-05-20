@@ -1,0 +1,185 @@
+/* ============================================
+   COMPONENTS: Header, Nav, Buttons, Contact
+   ============================================ */
+
+/* --- HEADER --- */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: calc(100% - 3rem);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    z-index: 10;
+    transform: translate3d(0, 0, 0);
+    transition: opacity 0.10s ease, filter 0.10s ease;
+}
+
+.menu-btn,
+.contact-btn {
+    pointer-events: auto;
+}
+
+.header.hidden {
+    opacity: 0;
+    filter: blur(16px) brightness(1.2);
+}
+
+/* --- PILLS & BUTTONS --- */
+.pill {
+    padding: .45rem .9rem;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+    background: transparent;
+    color: #F2F2F2;
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-block;
+    width: fit-content;
+    white-space: nowrap;
+    min-width: unset;
+    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out, opacity 0.25s ease-out;
+    will-change: transform, box-shadow;
+}
+
+.pill:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+}
+
+/* --- NAV --- */
+.nav {
+    position: absolute;
+    top: 64px;
+    left: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .45rem;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out, opacity 0.25s ease-out;
+    will-change: transform, box-shadow;
+}
+
+.nav.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.nav a:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+}
+
+/* --- CONTACT SECTION --- */
+.contact-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(
+        1200px 600px at 80% 20%,
+        rgba(255,255,255,0.04),
+        transparent 60%
+    ), #0A0A0A;
+}
+
+.contact-inner {
+    max-width: 520px;
+    width: 100%;
+    padding: 2rem 1.5rem;
+    text-align: center;
+}
+
+.contact-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 200;
+    letter-spacing: .25em;
+    margin-bottom: 2.5rem;
+}
+
+.contact-intro {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.contact-sub {
+    font-size: 0.95rem;
+    opacity: 0.75;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.contact-sub-last {
+    margin-bottom: 4rem;
+}
+
+.contact-cta {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 999px;
+    padding: .8rem 1.6rem;
+    color: #F2F2F2;
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin-bottom: 4rem;
+    transition: transform .35s ease, box-shadow .8s ease;
+}
+
+.contact-cta:hover {
+    transform: scale(1.035);
+    box-shadow: 0 0 16px rgba(255,255,255,0.45);
+}
+
+.contact-alt {
+    margin-bottom: 2rem;
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+.contact-links {
+    margin-top: .75rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.contact-links a {
+    color: #F2F2F2;
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s ease;
+}
+
+.contact-links a:hover {
+    border-color: rgba(255,255,255,0.6);
+}
+
+.contact-note {
+    font-size: 0.75rem;
+    opacity: 0.5;
+    line-height: 1.6;
+}
+
+/* --- SCROLL REVEAL --- */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 1.2s ease;
+}
+
+.scroll-show {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.scroll-delay {
+    transition-delay: .25s;
+}

@@ -1,0 +1,76 @@
+/* ============================================
+   HERO: Words, Layout, Text, Image Layer
+   ============================================ */
+
+/* --- HERO WORDS --- */
+.hero-word {
+    opacity: 0;
+    transform: translateY(60px);
+    filter: blur(15px);
+    will-change: opacity, transform, filter;
+    display: block;
+    font-family: 'Oswald', sans-serif;
+    font-size: 6rem;
+    font-weight: 200;
+    letter-spacing: 0.2em;
+    line-height: .9;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.hero-word.name-luca,
+.hero-word.name-blako {
+    display: block;
+    font-family: 'Oswald', sans-serif;
+    font-size: 6rem;
+    font-weight: 200;
+    letter-spacing: 0.2em;
+    line-height: 1;
+    margin-left: -0.5rem;
+}
+
+.tagline {
+    margin-top: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    font-weight: 400;
+    line-height: .5;
+    margin-bottom: 0;
+}
+
+/* --- HERO LAYOUT --- */
+.hero {
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    overflow: hidden;
+    transform: translate3d(0, 0, 0);
+    z-index: 6;
+    opacity: 1;
+    will-change: opacity, transform;
+}
+
+.hero-image-layer {
+    position: absolute;
+    inset: 0;
+    background: url('/assets/images/Hero1.jpg') center center no-repeat;
+    background-size: cover;
+    z-index: 2;
+    opacity: 1;
+    will-change: opacity, transform, filter;
+    transition: none;
+}
+
+.hero-text {
+    position: absolute;
+    bottom: 5vh;
+    left: 1rem;
+    z-index: 3;
+    color: #fff;
+    will-change: transform, opacity, filter;
+    animation: none;
+    transform: translate3d(0, 0, 0);
+}

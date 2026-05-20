@@ -1,0 +1,60 @@
+/* ============================================
+   BASE: Variables, Reset, General Styles
+   ============================================ */
+
+html {
+    -webkit-overflow-scrolling: touch;
+}
+
+body {
+    margin: 0;
+    background: #0A0A0A;
+    color: #F2F2F2;
+    font-family: 'Inter', sans-serif;
+    opacity: 0;
+    transition: opacity 0.8s ease-out;
+}
+
+body.page-loaded {
+    opacity: 1;
+}
+
+/* --- GRAIN VIDEO --- */
+.grain-video {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    z-index: 9999;
+    transform: scale(1.10);
+    transform-origin: center center;
+    will-change: transform, opacity, filter;
+    opacity: 0.35;
+    mix-blend-mode: overlay;
+    filter: contrast(1.2) saturate(1.03) brightness(1.02);
+}
+
+/* --- FAIL-SAFE: VISIBILIDAD SIN GSAP --- */
+html.no-gsap body {
+    opacity: 1 !important;
+}
+
+html.no-gsap .hero-word,
+html.no-gsap .hero-text-content,
+html.no-gsap .bio-title,
+html.no-gsap .bio-wrapper p,
+html.no-gsap .scroll-reveal,
+html.no-gsap .tattoo-section,
+html.no-gsap .tattoo-overlay-text,
+html.no-gsap .tattoo-cta,
+html.no-gsap .contact-inner {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+}
+
+html.no-gsap .grain-video {
+    display: none !important;
+}
