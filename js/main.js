@@ -14,41 +14,7 @@ try {
     console.warn('gsap.registerPlugin failed:', err);
 }
 
-// --- Safety wrappers: ignore attempts to animate null/empty targets ---
-;(function makeGsapSafe(){
-    if (!window.gsap) return;
-    const g = window.gsap;
-    const wrap = (fnName) => {
-        const orig = g[fnName];
-        if (typeof orig !== 'function') return;
-        g[fnName] = function(targets, vars) {
-            // normalize
-            if (targets == null) return null;
-            // string selector
-            if (typeof targets === 'string') {
-                const nodes = document.querySelectorAll(targets);
-                if (!nodes || nodes.length === 0) return null;
-            }
-            // NodeList or Array
-            if (NodeList && targets instanceof NodeList) {
-                if (targets.length === 0) return null;
-            }
-            if (Array.isArray(targets) && targets.length === 0) return null;
-            // single Element not in DOM
-            if (targets instanceof Element) {
-                if (!document.body.contains(targets)) return null;
-            }
-            try {
-                return orig.apply(this, arguments);
-            } catch (e) {
-                console.warn('gsap.'+fnName+' failed safely:', e);
-                return null;
-            }
-        };
-    };
 
-    ['to','fromTo','set','from','killTweensOf'].forEach(wrap);
-})();
 
 // ---- SELECTORES ----
 const header = document.querySelector(".header");
@@ -173,17 +139,11 @@ document.addEventListener("click", () => {
     ========================================================= */
 function initAnimations() {
     initScrollAnimations();
-    initCarouselAnimation();
-    setupTattooEntrance();
     setupMenuAnimation();
     setupIntersectionObserver();
-    setupBioToTattooTransition();
-    initTattooCarousel();
-    setupTattooSectionFade();
     setupHeroEffects();
     setupSmartHeader();
     setupContactEffects();
-    setupIlustracionAnimation();
 
 }
 
@@ -202,9 +162,6 @@ function initScrollAnimations() {
     if (!fades.length) return;
 
     fades.forEach((el) => {
-        // Ignorar la sección Tattoo
-        if (el.id === 'tattoo') return;
-
         gsap.set(el, {
             opacity: 0,
             y: 40,
@@ -224,10 +181,7 @@ function initScrollAnimations() {
     });
 }
 
-/* Placeholder para el carrusel (C4) */
-function initCarouselAnimation() {
-    // Implementación futura del carrusel
-}
+// Note: carousel animation moved to separate page (carrusel.html)
 
 
 // ---------------------------
@@ -236,7 +190,6 @@ function initCarouselAnimation() {
 
 function hideHeaderCinematic() {
     gsap.killTweensOf(header);
-    // clear any pending auto-hide timer
     if (headerAutoHideTimer) {
         clearTimeout(headerAutoHideTimer);
         headerAutoHideTimer = null;
@@ -406,9 +359,6 @@ function setupHeroEffects() {
 }
 
 
-// Tattoo carousel data removed — clean start
-
-
 // ---------------------------
 // MENU ANIMATION
 // ---------------------------
@@ -536,44 +486,6 @@ navLinks.forEach(link => {
             hideHeaderCinematic();
             window.location.href = href;
         }
-
-        // 🔑 bloqueamos comportamiento automático
-        isNavigatingViaMenu = true;
-
-        if (menuOpen && menuTimeline) {
-            // 1️⃣ cerramos primero los links del menú
-            menuTimeline.timeScale(1.6).reverse();
-            menuTimeline.eventCallback("onReverseComplete", () => {
-                nav.classList.remove("open");
-                menuOpen = false;
-                if (menuBtn) menuBtn.textContent = "Menu";
-
-                // 2️⃣ escondemos el header (fade + slide)
-                hideHeaderCinematic();
-
-                // 3️⃣ micro delay cinematográfico
-                setTimeout(() => {
-                    scrollFunction();
-                }, 220);
-
-                // 4️⃣ liberamos control luego del scroll
-                setTimeout(() => {
-                    isNavigatingViaMenu = false;
-                }, 1100);
-
-                // limpiamos callback
-                menuTimeline.eventCallback("onReverseComplete", null);
-            });
-        } else {
-            // fallback (por si el menú no estaba abierto)
-            hideHeaderCinematic();
-            setTimeout(() => {
-                scrollFunction();
-            }, 220);
-            setTimeout(() => {
-                isNavigatingViaMenu = false;
-            }, 1100);
-        }
     });
 });
 
@@ -604,51 +516,14 @@ function setupIntersectionObserver() {
 }
 
 
-// ---------------------------
-// HERO ENTRY (Función no usada, se deja para consistencia)
-// ---------------------------
-function animateHeroText() {
-    const tl = gsap.timeline();
-    tl.to(".hero-word", {
-        opacity: 1,
-        y: 0,
-        filter: "blur(0px)",
-        duration: 0.9,
-        stagger: 0.5,
-        ease: "power3.out"
-    });
-}
 
-
-// =============================
-// BIO → ENTRADA / SALIDA SUAVE
-// =============================
-function setupBioToTattooTransition() {
-    // Removed tattoo-specific transition. No-op.
-    return;
-}
 
 
 
 // =========================================
 // TATTOO — ENTRADA / SALIDA LIMPIA (SIN TÍTULO)
 // =========================================
-function setupTattooEntrance() {
-    // Removed tattoo entrance logic. No-op.
-    return;
-}
-
-
-// =========================================
-// TATTOO — FADE CINEMATOGRÁFICO (SUAVE + ESTABLE)
-// =========================================
-function setupTattooSectionFade() { return; }
-
-
-// ---------------------------
-// TATTOO CAROUSEL
-// ---------------------------
-function initTattooCarousel() { return; }
+/* Removed several tattoo-specific no-op functions and unused carousel initializer. */
 
 // init the hint when DOM ready (removed — using pagination dots instead)
 openContactFormBtn?.addEventListener("click", () => {
@@ -656,53 +531,9 @@ openContactFormBtn?.addEventListener("click", () => {
     // - abrir modal de consulta
     // - o mostrar formulario inline
     // - o redirigir a calendario
-    console.log("CTA contacto clickeado");
+    // (logging removed during cleanup)
 });
-// =============================
-// Animación cinematográfica de la sección Ilustración
-// =============================
-function setupIlustracionAnimation() {
-    const seccion = document.getElementById("ilustracion");
-    if (!seccion) return;
-
-    const titulo = seccion.querySelector(".ilustracion-title");
-    const parrafos = seccion.querySelectorAll(".ilustracion-wrapper p");
-    const elementos = [titulo, ...parrafos];
-
-    // Estado inicial
-    gsap.set(elementos, {
-        opacity: 0,
-        y: 60,
-        filter: "blur(18px)"
-    });
-
-    gsap.timeline({
-        scrollTrigger: {
-            trigger: seccion,
-            start: "top 80%",
-            end: "bottom 0%",
-            scrub: true
-        }
-    })
-    // Fade-in + entrada
-    .to(elementos, {
-        opacity: 1,
-        y: 0,
-        filter: "blur(0px)",
-        stagger: 0.15,
-        ease: "power1.out"
-    }, 0)
-    // Fade-out al salir (suave)
-    .to(elementos, {
-        opacity: 0,
-        y: -20,
-        filter: "blur(12px)",
-        stagger: 0.12,
-        ease: "power1.in"
-    }, 1.40);
-}
-
-
+ 
 // =============================
 // CONTACT — EFECTOS SUTILES
 // =============================
@@ -827,3 +658,9 @@ window.addEventListener("load", () => {
     // PAGE FADE-IN
     document.body.classList.add("page-loaded");
 });
+
+// If this script is injected after the load event (e.g. dynamic injection),
+// ensure the page-loaded class is applied immediately so the page isn't left hidden.
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    try { document.body.classList.add('page-loaded'); } catch (e) {}
+}

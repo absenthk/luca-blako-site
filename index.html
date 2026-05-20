@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="es">
 <head>
     <link rel="preload" href="/assets/images/Hero1.jpg" as="image">
@@ -7,27 +7,12 @@
     <title>Luca Blako</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300&family=Inter:wght@300;400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <script>
-  document.documentElement.classList.add("js");
-</script>
-
+    <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
     <video class="grain-video" autoplay muted loop playsinline preload="auto">
         <source src="assets/videos/noise-mp4-720.mp4" type="video/mp4">
-        </video>
-
-  <script>
-const grainVideo = document.querySelector('.grain-video');
-if (grainVideo) {
-  const playVideo = () => grainVideo.play().catch(err => console.warn('grain video failed to play', err));
-
-  grainVideo.addEventListener('loadeddata', playVideo);
-  
-  // Failsafe si tarda en cargar
-  setTimeout(playVideo, 2000);
-}
-</script>
+    </video>
 
 
     <header class="header">
@@ -144,61 +129,7 @@ if (grainVideo) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
- <script>
-(function waitForGSAP() {
-  const maxRetries = 10;
-  let attempts = 0;
-
-  const checkGSAP = () => {
-    if (window.gsap) {
-      console.log('GSAP cargado correctamente.');
-      return;
-    }
-
-    attempts++;
-    if (attempts >= maxRetries) {
-      document.documentElement.classList.add('no-gsap');
-      console.warn('GSAP no cargó → activando modo failsafe');
-    } else {
-      setTimeout(checkGSAP, 200); // reintenta cada 200ms
-    }
-  };
-
-  checkGSAP();
-})();
-</script>
-<!-- Cargar main.js solo cuando GSAP esté disponible para evitar errores que dejen la página oculta -->
-<script>
-(function loadMainWhenGSAPReady() {
-    function injectMain() {
-        var s = document.createElement('script');
-        s.src = 'js/main.js';
-        s.defer = false;
-        document.body.appendChild(s);
-    }
-
-    if (window.gsap) {
-        injectMain();
-        return;
-    }
-
-    var attempts = 0;
-    var max = 35; // ~7s
-    var iv = setInterval(function() {
-        attempts++;
-        if (window.gsap) {
-            clearInterval(iv);
-            injectMain();
-        } else if (attempts >= max) {
-            clearInterval(iv);
-            document.documentElement.classList.add('no-gsap');
-            // Ensure page is visible even sin JS de animación
-            window.addEventListener('load', function() { document.body.classList.add('page-loaded'); });
-            console.warn('GSAP no cargó: main.js no se inyectó. Activando modo no-gsap.');
-        }
-    }, 200);
-})();
-</script>
+<script src="js/setup.js"></script>
   
 </body>
 </html>

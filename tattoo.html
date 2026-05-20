@@ -28,18 +28,6 @@
             <video id="heroImageLayer" class="hero-image-layer" autoplay muted loop playsinline preload="auto" poster="/assets/images/Hero1.jpg" disablePictureInPicture controlsList="nodownload noremoteplayback" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
                 <source src="assets/videos/tattoo/hero1.mp4" type="video/mp4">
             </video>
-            <script>
-                // Force-disable Picture-in-Picture for the hero video (extra defensive)
-                (function(){
-                    var v = document.getElementById('heroImageLayer');
-                    try {
-                        if (v) {
-                            v.disablePictureInPicture = true;
-                            v.disableRemotePlayback = true;
-                        }
-                    } catch(e){}
-                })();
-            </script>
             <div class="hero-text">
                 <div class="hero-text-content">
                     <div id="hero-sequence">
@@ -134,21 +122,10 @@
         </section>
     </main>
 
-    <script>
-    // Minimal page JS fallback: only ensure visual "page-loaded" class and contact button safe hook.
-    document.addEventListener('DOMContentLoaded', function(){
-        try { document.body.classList.add('page-loaded'); } catch(e){}
-        var contactBtn = document.getElementById('contactBtn');
-        if (contactBtn) {
-            contactBtn.addEventListener('click', function(e){
-                // normal anchor behavior to #contacto preserved
-            });
-        }
-    });
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+    <script src="js/setup.js"></script>
     <script src="js/main.js"></script>
 
 </body>
