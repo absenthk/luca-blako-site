@@ -120,6 +120,116 @@
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
 }
 
+/* --- SCROLL INDICATOR --- */
+.scroll-indicator {
+    position: fixed;
+    right: 1.25rem;
+    top: 50%;
+    z-index: 9;
+    width: 28px;
+    height: min(52vh, 330px);
+    min-height: 210px;
+    padding: 14px 0;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: #F2F2F2;
+    cursor: grab;
+    opacity: 0.72;
+    touch-action: none;
+    transform: translateY(-50%);
+    transition: opacity 0.25s ease-out;
+    user-select: none;
+    will-change: opacity;
+}
+
+.scroll-indicator:hover {
+    opacity: 1;
+}
+
+.scroll-indicator:focus-visible {
+    outline: none;
+}
+
+.scroll-indicator.is-dragging {
+    cursor: grabbing;
+    opacity: 1;
+}
+
+.scroll-indicator__track {
+    position: relative;
+    display: block;
+    width: 2px;
+    height: 100%;
+    margin: 0 auto;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.scroll-indicator__thumb {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 7px;
+    height: var(--scroll-thumb-height, 42px);
+    border-radius: 999px;
+    background: rgba(242, 242, 242, 0.92);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
+    transition: width 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    will-change: transform, width, height, box-shadow;
+}
+
+.scroll-indicator:hover .scroll-indicator__thumb,
+.scroll-indicator:focus-visible .scroll-indicator__thumb,
+.scroll-indicator.is-dragging .scroll-indicator__thumb {
+    width: 9px;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 0 14px rgba(255, 255, 255, 0.72);
+}
+
+.scroll-indicator.is-hinting {
+    animation: scrollIndicatorHint 1.45s ease-in-out 2;
+}
+
+@keyframes scrollIndicatorHint {
+    0%, 100% {
+        opacity: 0.72;
+    }
+    45% {
+        opacity: 1;
+    }
+}
+
+.scroll-indicator.is-hinting .scroll-indicator__thumb {
+    animation: scrollIndicatorThumbHint 1.45s ease-in-out 2;
+}
+
+@keyframes scrollIndicatorThumbHint {
+    0%, 100% {
+        width: 7px;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
+    }
+    45% {
+        width: 10px;
+        box-shadow: 0 0 16px rgba(255, 255, 255, 0.78);
+    }
+}
+
+@media (max-width: 700px) {
+    .scroll-indicator {
+        right: 0.7rem;
+        width: 24px;
+        height: min(38vh, 260px);
+        min-height: 160px;
+        padding: 13px 0;
+    }
+
+    .scroll-indicator__thumb {
+        width: 6px;
+        height: 34px;
+    }
+}
+
 /* --- CONTACT SECTION --- */
 .contact-section {
     min-height: 100vh;

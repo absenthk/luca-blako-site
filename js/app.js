@@ -5,6 +5,7 @@ import { initHero } from "./modules/hero.js";
 import { initMenu } from "./modules/menu.js";
 import { initPageLoad } from "./modules/page-load.js";
 import { initRevealObserver, initScrollAnimations } from "./modules/reveal.js";
+import { initScrollIndicator } from "./modules/scroll-indicator.js";
 
 let isNavigatingViaMenu = false;
 
@@ -26,6 +27,7 @@ function initApp() {
     initScrollAnimations();
     initRevealObserver();
     initHero();
+    initScrollIndicator();
     initSmartHeader({
         menuControls,
         isNavigatingViaMenu: () => isNavigatingViaMenu
