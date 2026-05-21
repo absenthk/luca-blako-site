@@ -9,14 +9,18 @@
     <link rel="stylesheet" href="css/style.css">
     <script>document.documentElement.classList.add("js");</script>
 </head>
-<body>
+<body data-page="home">
     <video class="grain-video" autoplay muted loop playsinline preload="auto">
         <source src="assets/videos/noise-mp4-720.mp4" type="video/mp4">
     </video>
 
 
     <header class="header">
-        <button class="menu-btn pill" id="menuBtn">Menu</button>
+        <button class="menu-btn" id="menuBtn" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <a class="contact-btn pill" id="contactBtn" href="#contacto">Contacto</a>
         <nav class="nav" id="navMenu">
         <a class="pill" href="tattoo.html">Tattoo</a>

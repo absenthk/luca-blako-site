@@ -30,19 +30,21 @@ export function initMenu({ hideHeader, setNavigatingViaMenu }) {
     function closeMenu(timeScale = 1.4) {
         if (menuTimeline) menuTimeline.timeScale(timeScale).reverse();
         menuOpen = false;
-        if (menuBtn) menuBtn.textContent = "Menu";
         removeOpenClassAfterReverse();
     }
 
     function openMenu() {
         nav.classList.add("open");
         menuOpen = true;
-        if (menuBtn) menuBtn.textContent = "Cerrar";
         if (menuTimeline) menuTimeline.timeScale(1).play();
     }
 
     function setupMenuAnimation() {
         if (!navLinks.length) return;
+        if (!window.gsap) {
+            console.warn("GSAP not available, skipping menu animation setup");
+            return;
+        }
 
         gsap.set(navLinks, {
             opacity: 0,
@@ -95,14 +97,18 @@ export function initMenu({ hideHeader, setNavigatingViaMenu }) {
                 return;
             }
 
-            gsap.to(window, {
-                duration: 0.8,
-                scrollTo: {
-                    y: href,
-                    autoKill: false
-                },
-                ease: "power2.inOut"
-            });
+            if (window.gsap) {
+                gsap.to(window, {
+                    duration: 0.8,
+                    scrollTo: {
+                        y: href,
+                        autoKill: false
+                    },
+                    ease: "power2.inOut"
+                });
+            } else {
+                target.scrollIntoView({ behavior: "smooth" });
+            }
         };
 
         setNavigatingViaMenu(true);
@@ -118,7 +124,6 @@ export function initMenu({ hideHeader, setNavigatingViaMenu }) {
             menuTimeline.eventCallback("onReverseComplete", () => {
                 nav.classList.remove("open");
                 menuOpen = false;
-                if (menuBtn) menuBtn.textContent = "Menu";
                 completeNavigation();
                 menuTimeline.eventCallback("onReverseComplete", null);
             });
@@ -139,7 +144,6 @@ export function initMenu({ hideHeader, setNavigatingViaMenu }) {
             menuTimeline.eventCallback("onReverseComplete", () => {
                 nav.classList.remove("open");
                 menuOpen = false;
-                if (menuBtn) menuBtn.textContent = "Menu";
                 completeNavigation();
                 menuTimeline.eventCallback("onReverseComplete", null);
             });
@@ -168,6 +172,31 @@ export function initMenu({ hideHeader, setNavigatingViaMenu }) {
         });
     }
 
+    function replaceActivePageLink() {
+        const currentPage = document.body.getAttribute("data-page");
+        if (!currentPage) return;
+
+        const pageToFileMap = {
+            "tattoo": "tattoo.html",
+            "ilustracion": "ilustracion.html",
+            "pintura": "pintura.html",
+            "escultura": "escultura.html",
+            "foto": "foto.html",
+            "tienda": "tienda.html"
+        };
+
+        const currentFile = pageToFileMap[currentPage];
+        if (!currentFile) return;
+
+        navLinks.forEach(link => {
+            const href = link.getAttribute("href");
+            if (href === currentFile) {
+                link.setAttribute("href", "index.html");
+                link.textContent = "Inicio";
+            }
+        });
+    }
+
     if (menuBtn) {
         menuBtn.addEventListener("click", e => {
             e.stopPropagation();
@@ -186,6 +215,7 @@ export function initMenu({ hideHeader, setNavigatingViaMenu }) {
     setupMenuAnimation();
     setupScrollClose();
     setupNavigation();
+    replaceActivePageLink();
 
     return {
         menuBtn,

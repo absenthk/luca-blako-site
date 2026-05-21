@@ -14,12 +14,14 @@ function setNavigatingViaMenu(value) {
 
 function initApp() {
     initPageLoad();
-    if (!initGsap()) return;
+    const gsapAvailable = initGsap();
 
     const menuControls = initMenu({
         hideHeader: hideHeaderCinematic,
         setNavigatingViaMenu
     });
+
+    if (!gsapAvailable) return;
 
     initScrollAnimations();
     initRevealObserver();

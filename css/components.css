@@ -21,6 +21,52 @@
     pointer-events: auto;
 }
 
+/* --- BURGER MENU BUTTON --- */
+.menu-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+    min-width: unset;
+    font-size: 0;
+    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out, border-color 0.25s ease-out;
+    will-change: transform, box-shadow;
+}
+
+.menu-btn span {
+    width: 16px;
+    height: 2px;
+    background-color: #F2F2F2;
+    display: block;
+    position: absolute;
+    transition: all 0.3s ease-out;
+}
+
+.menu-btn span:nth-child(1) {
+    top: 11px;
+}
+
+.menu-btn span:nth-child(2) {
+    top: 17px;
+}
+
+.menu-btn span:nth-child(3) {
+    top: 23px;
+}
+
+.menu-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+    border-color: rgba(255, 255, 255, 0.7);
+}
+
 .header.hidden {
     opacity: 0;
     filter: blur(16px) brightness(1.2);
