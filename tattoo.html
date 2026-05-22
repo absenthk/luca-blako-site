@@ -10,12 +10,15 @@
 </head>
 <body data-page="tattoo" class="tattoo-page">
     <header class="header">
-        <button class="menu-btn" id="menuBtn" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
+        <button class="logo-btn" id="scrollTopBtn" aria-label="Scroll to top">
+            <img src="assets/images/logos/blakologo1.PNG" alt="Blako">
         </button>
-        <a class="contact-btn pill" id="contactBtn" href="#contacto">Contacto</a>
+        <div class="header-right">
+            <a class="contact-btn" id="contactBtn" href="#contacto">Contacto</a>
+            <a class="social-btn" id="igBtn" href="https://www.instagram.com/blako.ttt/" target="_blank" aria-label="Instagram">
+                <img src="assets/images/logos/iglogo.png" alt="Instagram">
+            </a>
+        </div>
         <nav class="nav" id="navMenu">
             <a class="pill" href="tattoo.html">Tattoo</a>
             <a class="pill" href="ilustracion.html">Ilustración</a>
@@ -130,6 +133,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
     <script src="js/setup.js"></script>
     <script type="module" src="js/app.js"></script>
+    
+    <script>
+        // Scroll to top functionality for logo button
+        (function initScrollToTop() {
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            if (!scrollTopBtn) return;
+            
+            scrollTopBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                if (window.gsap) {
+                    gsap.to(window, {
+                        duration: 0.8,
+                        scrollTo: { y: 0, autoKill: false },
+                        ease: "power2.inOut"
+                    });
+                } else {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+        })();
+    </script>
 
 </body>
 </html>
