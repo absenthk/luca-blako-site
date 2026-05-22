@@ -2,6 +2,11 @@
    TATTOO PAGE: Overrides & Page-Specific Styles
    ============================================ */
 
+/* --- HIDE BURGER MENU ON TATTOO PAGE --- */
+.tattoo-page .menu-btn {
+    display: none;
+}
+
 /* --- TATTOO SECTIONS: Compact, Centered, Transparent --- */
 #tattoo-about .summary-inner,
 #tattoo-precios .summary-inner,
