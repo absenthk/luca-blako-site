@@ -56,6 +56,8 @@ html.no-gsap .scroll-reveal,
 html.no-gsap .tattoo-section,
 html.no-gsap .tattoo-overlay-text,
 html.no-gsap .tattoo-cta,
+html.no-gsap .cta-button,
+html.no-gsap .scroll-indicator-btn,
 html.no-gsap .contact-inner {
     opacity: 1 !important;
     transform: none !important;

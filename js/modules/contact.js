@@ -7,12 +7,15 @@ export function initContactEffects({ hideHeader, setNavigatingViaMenu }) {
     const contactInner = document.querySelector(".contact-inner");
     const contactCTA = document.querySelector(".contact-cta");
     const contactBtn = document.getElementById("contactBtn");
+    const isTattooPage = document.body?.dataset.page === "tattoo";
 
     if (!contactSection || !contactInner || !contactCTA) return;
 
     gsap.set(contactCTA, {
         scale: 1,
-        opacity: 1
+        opacity: 0,
+        y: 60,
+        filter: "blur(15px)"
     });
     gsap.set(contactInner, {
         opacity: 0,
@@ -24,6 +27,19 @@ export function initContactEffects({ hideHeader, setNavigatingViaMenu }) {
         y: 0,
         duration: 1.4,
         ease: "power2.out",
+        scrollTrigger: {
+            trigger: contactSection,
+            start: "top 45%"
+        }
+    });
+
+    gsap.to(contactCTA, {
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        duration: 0.9,
+        ease: "power3.out",
+        delay: 0.35,
         scrollTrigger: {
             trigger: contactSection,
             start: "top 45%"
@@ -73,15 +89,17 @@ export function initContactEffects({ hideHeader, setNavigatingViaMenu }) {
         contactTimer = null;
     }
 
-    ScrollTrigger.create({
-        trigger: contactSection,
-        start: "top 60%",
-        end: "bottom 40%",
-        onEnter: schedulePulse,
-        onEnterBack: schedulePulse,
-        onLeave: clearPulse,
-        onLeaveBack: clearPulse
-    });
+    if (!isTattooPage) {
+        ScrollTrigger.create({
+            trigger: contactSection,
+            start: "top 60%",
+            end: "bottom 40%",
+            onEnter: schedulePulse,
+            onEnterBack: schedulePulse,
+            onLeave: clearPulse,
+            onLeaveBack: clearPulse
+        });
+    }
 
     contactBtn?.addEventListener("click", (e) => {
         e.preventDefault();

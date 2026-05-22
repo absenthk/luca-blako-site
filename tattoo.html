@@ -37,9 +37,23 @@
             <div class="hero-text">
                 <div class="hero-text-content">
                     <div id="hero-sequence">
-                        <span class="hero-word name-blako">BLAKO</span>
-                        <span class="hero-word name-luca">TATTOO</span>
-                        <span class="hero-word tagline">Artista tatuador</span>
+                        <div class="hero-title-lockup">
+                            <span class="hero-word name-blako">BLAKO</span>
+                            <span class="hero-word name-luca">TATTOO</span>
+                        </div>
+                        <div class="hero-tagline-block">
+                            <span class="hero-word tagline">Piezas con dirección artística</span>
+                            <span class="hero-word tagline">criterio e impacto visual</span>
+                        </div>
+                    </div>
+                    <div class="hero-cta">
+                        <a href="https://forms.gle/gSYEpnUSY5rrSJmcA" target="_blank" class="cta-button">AGENDÁ UNA CONSULTA</a>
+                        <button class="scroll-indicator-btn" id="scrollDownBtn" aria-label="Scroll down">
+                            <span>CONOCÉ MAS</span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 12L2 6h12L8 12" fill="currentColor"/>
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -102,9 +116,9 @@
                 <p class="contact-sub contact-sub-last">
                     Trabajo desde estudio privado en Buenos Aires.
                 </p>
-                <button class="contact-cta" id="openContactForm">
-                    Agendá tu consulta
-                </button>
+                <a class="contact-cta cta-button" id="openContactForm" href="https://forms.gle/gSYEpnUSY5rrSJmcA" target="_blank">
+                    Empezá tu próximo tatuaje
+                </a>
                 <div class="contact-alt">
                     <span>También podés escribirme por:</span>
                     <div class="contact-links">
@@ -151,6 +165,27 @@
                     });
                 } else {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+        })();
+
+        // Scroll down to tattoo-about section
+        (function initScrollDown() {
+            const scrollDownBtn = document.getElementById('scrollDownBtn');
+            const tattooAboutSection = document.getElementById('tattoo-about');
+            if (!scrollDownBtn || !tattooAboutSection) return;
+
+            scrollDownBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                if (window.gsap) {
+                    gsap.to(window, {
+                        duration: 0.8,
+                        scrollTo: { y: tattooAboutSection, autoKill: false },
+                        ease: "power2.inOut"
+                    });
+                } else {
+                    tattooAboutSection.scrollIntoView({ behavior: 'smooth' });
                 }
             });
         })();

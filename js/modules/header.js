@@ -1,4 +1,4 @@
-const HEADER_AUTO_HIDE_MS = 3000;
+const HEADER_AUTO_HIDE_MS = 7000;
 
 let headerAutoHideTimer = null;
 

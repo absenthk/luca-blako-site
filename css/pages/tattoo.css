@@ -7,8 +7,14 @@
     display: none;
 }
 
+.tattoo-page {
+    --tattoo-page-gutter: clamp(1.5rem, 4vw, 3rem);
+}
+
 .tattoo-page .header {
     justify-content: space-between;
+    width: calc(100% - (var(--tattoo-page-gutter) * 2));
+    padding-inline: var(--tattoo-page-gutter);
 }
 
 /* Logo button (top-left, scroll to top) */
@@ -43,12 +49,18 @@
     gap: 1rem;
 }
 
+.tattoo-page .nav {
+    left: var(--tattoo-page-gutter);
+}
+
 /* Contact button - text only, no pill */
 .tattoo-page .contact-btn {
     background: transparent;
     border: none;
     color: #F2F2F2;
-    font-size: 0.9rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     text-decoration: none;
     cursor: pointer;
     transition: color 0.25s ease-out, text-shadow 0.25s ease-out;
@@ -69,8 +81,8 @@
     justify-content: center;
     cursor: pointer;
     padding: 0;
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     transition: transform 0.25s ease-out, filter 0.25s ease-out;
 }
 
@@ -83,6 +95,124 @@
 .tattoo-page .social-btn:hover {
     transform: scale(1.1);
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
+
+/* --- HERO CUSTOMIZATION --- */
+.tattoo-page .hero-text-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    height: 100%;
+    margin-left: var(--tattoo-page-gutter);
+}
+
+.tattoo-page .hero-text {
+    left: 0;
+}
+
+.tattoo-page #hero-sequence {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.tattoo-page .hero-title-lockup,
+.tattoo-page .hero-tagline-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.tattoo-page .hero-cta {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.js .tattoo-page .hero-cta .cta-button,
+.js .tattoo-page .hero-cta .scroll-indicator-btn,
+.js .tattoo-page .contact-cta.cta-button {
+    opacity: 0;
+    transform: translateY(60px);
+    filter: blur(15px);
+}
+
+/* Red CTA Button with backdrop blur - transparent style */
+.tattoo-page .cta-button {
+    padding: 0.65rem 1.5rem;
+    background: rgba(142, 3, 32, 0.15);
+    border: 1px solid rgba(142, 3, 32, 0.5);
+    color: #F2F2F2;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.25s ease-out;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 0 20px rgba(200, 60, 80, 0.5), 0 0 40px rgba(200, 60, 80, 0.25);
+    text-shadow: 0 0 8px rgba(255, 60, 90, 0.9), 0 0 18px rgba(200, 20, 50, 0.72);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    animation: buttonBreathe 3s ease-in-out infinite;
+}
+
+@keyframes buttonBreathe {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(200, 60, 80, 0.5), 0 0 40px rgba(200, 60, 80, 0.25);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(200, 60, 80, 0.7), 0 0 60px rgba(200, 60, 80, 0.4);
+    }
+}
+
+.tattoo-page .cta-button:hover {
+    background: rgba(142, 3, 32, 0.25);
+    border-color: rgba(142, 3, 32, 0.8);
+    box-shadow: 0 0 30px rgba(200, 60, 80, 0.8), 0 0 60px rgba(200, 60, 80, 0.5), 0 0 10px rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    animation: none;
+}
+
+.tattoo-page .contact-cta.cta-button {
+    margin-bottom: 4rem;
+}
+
+/* Scroll down indicator */
+.tattoo-page .scroll-indicator-btn {
+    background: transparent;
+    border: none;
+    color: #F2F2F2;
+    cursor: pointer;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0;
+    transition: all 0.25s ease-out;
+}
+
+.tattoo-page .scroll-indicator-btn:hover {
+    opacity: 0.7;
+}
+
+.tattoo-page .scroll-indicator-btn svg {
+    transition: transform 0.3s ease-out;
+}
+
+.tattoo-page .scroll-indicator-btn:hover svg {
+    transform: translateY(3px);
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
 }
 
 /* --- TATTOO SECTIONS: Compact, Centered, Transparent --- */
@@ -140,4 +270,133 @@
 
 .map-wrapper iframe {
     border-radius: 8px;
+}
+
+@media (max-width: 700px) {
+    .tattoo-page {
+        --tattoo-page-gutter: 1rem;
+    }
+
+    .tattoo-page .header {
+        padding-top: 0.85rem;
+    }
+
+    .tattoo-page .logo-btn {
+        width: 34px;
+        height: 34px;
+    }
+
+    .tattoo-page .header-right {
+        gap: 0.75rem;
+    }
+
+    .tattoo-page .social-btn {
+        width: 24px;
+        height: 24px;
+    }
+
+    .tattoo-page .hero-text {
+        bottom: var(--tattoo-page-gutter);
+        width: 100%;
+    }
+
+    .tattoo-page .hero-text-content {
+        width: calc(100vw - (var(--tattoo-page-gutter) * 2));
+        max-width: 21rem;
+        margin-left: var(--tattoo-page-gutter);
+    }
+
+    .tattoo-page .hero-title-lockup,
+    .tattoo-page .hero-tagline-block {
+        width: 100%;
+    }
+
+    .tattoo-page .hero-word,
+    .tattoo-page .hero-word.name-luca,
+    .tattoo-page .hero-word.name-blako {
+        width: max-content;
+        font-size: clamp(3.35rem, 18vw, 4.55rem);
+        letter-spacing: 0.2em;
+        line-height: 0.95;
+        margin-left: 0;
+    }
+
+    .tattoo-page .tagline {
+        width: max-content;
+        max-width: 100%;
+        font-size: 0.78rem;
+        letter-spacing: 0;
+        line-height: 1.35;
+        margin-top: 0.45rem;
+    }
+
+    .tattoo-page .hero-tagline-block {
+        margin-top: 0.65rem;
+    }
+
+    .tattoo-page #hero-sequence {
+        gap: 0.15rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .tattoo-page .hero-cta {
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        margin-top: 0.45rem;
+    }
+
+    .tattoo-page .cta-button {
+        max-width: calc(100% - 7rem);
+        padding: 0.58rem 0.85rem;
+        font-size: 0.66rem;
+        letter-spacing: 0;
+        white-space: nowrap;
+        box-sizing: border-box;
+    }
+
+    .tattoo-page .scroll-indicator-btn {
+        flex: 0 0 auto;
+        max-width: 6.5rem;
+        font-size: 0.62rem;
+        letter-spacing: 0;
+        gap: 0.4rem;
+    }
+
+    .tattoo-page .scroll-indicator {
+        right: 0.2rem;
+    }
+
+    .tattoo-page .contact-cta.cta-button {
+        white-space: normal;
+        line-height: 1.25;
+    }
+}
+
+@media (max-width: 380px) {
+    .tattoo-page .hero-word,
+    .tattoo-page .hero-word.name-luca,
+    .tattoo-page .hero-word.name-blako {
+        font-size: clamp(3rem, 17.5vw, 3.35rem);
+    }
+
+    .tattoo-page .tagline {
+        font-size: 0.72rem;
+    }
+
+    .tattoo-page .cta-button {
+        font-size: 0.6rem;
+        padding-inline: 0.72rem;
+    }
+
+    .tattoo-page .scroll-indicator-btn {
+        max-width: 5.8rem;
+        font-size: 0.58rem;
+    }
+
+    .tattoo-page .scroll-indicator {
+        right: 0.1rem;
+    }
 }

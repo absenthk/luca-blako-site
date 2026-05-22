@@ -7,9 +7,66 @@ export function initHero() {
     if (!hero || !heroText || !heroTextContent || !heroImageLayer) return;
 
     const heroWords = document.querySelectorAll(".hero-word");
+    const heroCtaItems = document.querySelectorAll(".hero-cta .cta-button, .hero-cta .scroll-indicator-btn");
     const heroHeight = hero.offsetHeight || window.innerHeight;
 
+    function fitTattooTitleToTagline() {
+        if (document.body?.dataset.page !== "tattoo") return;
+
+        const titleWords = Array.from(document.querySelectorAll(".hero-title-lockup .hero-word"));
+        const taglineBlock = document.querySelector(".hero-tagline-block");
+        const taglines = Array.from(document.querySelectorAll(".hero-tagline-block .tagline"));
+        if (!titleWords.length || !taglineBlock || !taglines.length) return;
+
+        if (!window.matchMedia("(max-width: 700px)").matches) {
+            titleWords.forEach((word) => {
+                word.style.fontSize = "";
+            });
+            return;
+        }
+
+        const taglineBlockWidth = taglineBlock.getBoundingClientRect().width;
+        const longestTaglineWidth = Math.max(
+            ...taglines.map((tagline) => tagline.getBoundingClientRect().width)
+        );
+        const targetWidth = Math.min(taglineBlockWidth, longestTaglineWidth);
+        if (!targetWidth) return;
+
+        let low = 32;
+        let high = 76;
+
+        for (let i = 0; i < 12; i += 1) {
+            const mid = (low + high) / 2;
+            titleWords.forEach((word) => {
+                word.style.fontSize = `${mid}px`;
+            });
+
+            const widestTitleLine = Math.max(
+                ...titleWords.map((word) => word.getBoundingClientRect().width)
+            );
+
+            if (widestTitleLine > targetWidth) {
+                high = mid;
+            } else {
+                low = mid;
+            }
+        }
+
+        titleWords.forEach((word) => {
+            word.style.fontSize = `${low}px`;
+        });
+    }
+
+    fitTattooTitleToTagline();
+    window.addEventListener("resize", fitTattooTitleToTagline);
+    document.fonts?.ready?.then(fitTattooTitleToTagline);
+
     gsap.set(heroImageLayer, { scale: 1 });
+    gsap.set(heroCtaItems, {
+        opacity: 0,
+        y: 60,
+        filter: "blur(15px)"
+    });
 
     gsap.timeline()
         .to(heroWords, {
@@ -21,6 +78,14 @@ export function initHero() {
             ease: "power3.out",
             delay: 0.5
         })
+        .to(heroCtaItems, {
+            opacity: 1,
+            y: 0,
+            filter: "blur(0px)",
+            duration: 0.9,
+            stagger: 0.18,
+            ease: "power3.out"
+        }, "-=0.2")
         .to(heroImageLayer, {
             scale: 1.05,
             duration: 4,
