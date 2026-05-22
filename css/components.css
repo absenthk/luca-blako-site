@@ -279,34 +279,6 @@
     box-shadow: 0 0 14px rgba(255, 255, 255, 0.72);
 }
 
-.scroll-indicator.is-hinting {
-    animation: scrollIndicatorHint 1.45s ease-in-out 2;
-}
-
-@keyframes scrollIndicatorHint {
-    0%, 100% {
-        opacity: 0.72;
-    }
-    45% {
-        opacity: 1;
-    }
-}
-
-.scroll-indicator.is-hinting .scroll-indicator__thumb {
-    animation: scrollIndicatorThumbHint 1.45s ease-in-out 2;
-}
-
-@keyframes scrollIndicatorThumbHint {
-    0%, 100% {
-        width: 7px;
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
-    }
-    45% {
-        width: 10px;
-        box-shadow: 0 0 16px rgba(255, 255, 255, 0.78);
-    }
-}
-
 @media (max-width: 700px) {
     .scroll-indicator {
         right: 0.7rem;

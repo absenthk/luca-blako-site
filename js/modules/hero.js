@@ -68,29 +68,37 @@ export function initHero() {
         filter: "blur(15px)"
     });
 
-    gsap.timeline()
-        .to(heroWords, {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            duration: 0.9,
-            stagger: 0.5,
-            ease: "power3.out",
-            delay: 0.5
-        })
-        .to(heroCtaItems, {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            duration: 0.9,
-            stagger: 0.18,
-            ease: "power3.out"
-        }, "-=0.2")
-        .to(heroImageLayer, {
-            scale: 1.05,
-            duration: 4,
-            ease: "power1.out"
-        }, 0);
+    function playHeroIntro() {
+        gsap.timeline({ delay: 0.18 })
+            .to(heroWords, {
+                opacity: 1,
+                y: 0,
+                filter: "blur(0px)",
+                duration: 0.9,
+                stagger: 0.5,
+                ease: "power3.out",
+                delay: 0.35
+            })
+            .to(heroCtaItems, {
+                opacity: 1,
+                y: 0,
+                filter: "blur(0px)",
+                duration: 0.9,
+                stagger: 0.18,
+                ease: "power3.out"
+            }, "-=0.2")
+            .to(heroImageLayer, {
+                scale: 1.05,
+                duration: 4,
+                ease: "power1.out"
+            }, 0);
+    }
+
+    if (window.blakoLoaderReady) {
+        window.blakoLoaderReady.then(playHeroIntro);
+    } else {
+        playHeroIntro();
+    }
 
     gsap.timeline({
         scrollTrigger: {

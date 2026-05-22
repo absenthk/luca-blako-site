@@ -20,7 +20,6 @@ export function initScrollIndicator() {
 
     const track = indicator.querySelector(".scroll-indicator__track");
     const thumb = indicator.querySelector(".scroll-indicator__thumb");
-    let hintTimer = null;
     let isDragging = false;
 
     function updateIndicator() {
@@ -38,24 +37,7 @@ export function initScrollIndicator() {
         indicator.setAttribute("aria-valuenow", Math.round(progress * 100).toString());
     }
 
-    function clearHint() {
-        indicator.classList.remove("is-hinting");
-        if (hintTimer) {
-            clearTimeout(hintTimer);
-            hintTimer = null;
-        }
-    }
-
-    function scheduleHint() {
-        hintTimer = setTimeout(() => {
-            if (window.scrollY < window.innerHeight * 0.35) {
-                indicator.classList.add("is-hinting");
-            }
-        }, 2000);
-    }
-
     function scrollToProgress(progress, immediate = false) {
-        clearHint();
         const targetY = Math.min(Math.max(progress, 0), 1) * scrollMax();
 
         if (immediate) {
@@ -84,7 +66,6 @@ export function initScrollIndicator() {
 
     function startDrag(event) {
         event.preventDefault();
-        clearHint();
         isDragging = true;
         indicator.classList.add("is-dragging");
         indicator.setPointerCapture?.(event.pointerId);
@@ -125,11 +106,9 @@ export function initScrollIndicator() {
     indicator.addEventListener("pointercancel", endDrag);
     indicator.addEventListener("keydown", handleKeydown);
     window.addEventListener("scroll", () => {
-        if (!isDragging) clearHint();
         updateIndicator();
     }, { passive: true });
     window.addEventListener("resize", updateIndicator);
 
     updateIndicator();
-    scheduleHint();
 }

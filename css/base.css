@@ -26,6 +26,56 @@ body.page-loaded {
     opacity: 1;
 }
 
+body.is-loading {
+    opacity: 1;
+}
+
+/* --- PAGE LOADER --- */
+.page-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: grid;
+    place-items: center;
+    background: #000;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.65s ease, visibility 0.65s ease;
+}
+
+.page-loader img {
+    width: clamp(56px, 12vw, 86px);
+    height: auto;
+    animation: pageLoaderSpin 1.45s ease-in-out infinite;
+    filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.22));
+}
+
+.page-loader.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+@keyframes pageLoaderSpin {
+    0% {
+        opacity: 0.72;
+        transform: rotate(0deg) scale(0.96);
+    }
+    50% {
+        opacity: 1;
+        transform: rotate(180deg) scale(1.04);
+    }
+    100% {
+        opacity: 0.72;
+        transform: rotate(360deg) scale(0.96);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-loader img {
+        animation: none;
+    }
+}
+
 /* --- GRAIN VIDEO --- */
 .grain-video {
     position: fixed;
