@@ -3,6 +3,8 @@
    ============================================ */
 
 /* --- HEADER CUSTOMIZATION --- */
+
+/* --- HEADER CUSTOMIZATION --- */
 .tattoo-page .menu-btn {
     display: none;
 }
@@ -41,6 +43,14 @@
 .tattoo-page .logo-btn:hover {
     transform: scale(1.08);
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
+
+/* Header social icon: mostrar en blanco en la página Tattoo */
+.tattoo-page .social-btn img {
+    filter: invert(100%);
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
 }
 
 /* Header right group (Contacto + Instagram) */
@@ -82,14 +92,14 @@
     justify-content: center;
     cursor: pointer;
     padding: 0;
-    width: 28px;
-    height: 28px;
+    width: 40px;
+    height: 40px;
     transition: transform 0.25s ease-out, filter 0.25s ease-out;
 }
 
 .tattoo-page .social-btn img {
-    width: 100%;
-    height: 100%;
+    width: 18px;
+    height: 18px;
     object-fit: contain;
 }
 
