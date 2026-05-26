@@ -9,6 +9,7 @@
 
 .tattoo-page {
     --tattoo-page-gutter: clamp(1.5rem, 4vw, 3rem);
+    font-family: 'Inter', sans-serif;
 }
 
 .tattoo-page .header {
@@ -217,20 +218,24 @@
 
 /* --- TATTOO SECTIONS: Compact, Centered, Transparent --- */
 #tattoo-about .summary-inner,
+#tattoo-sobre .summary-inner,
 #tattoo-precios .summary-inner,
 #tattoo-clientes .summary-inner,
-#tattoo-proceso .summary-inner {
-    max-width: 820px;
+#tattoo-proceso .summary-inner,
+#tattoo-ubicacion .summary-inner {
+    max-width: 860px;
     margin: 0 auto;
-    text-align: center;
+    text-align: left;
 }
 
 #tattoo-about,
+#tattoo-sobre,
 #tattoo-precios,
 #tattoo-clientes,
-#tattoo-proceso {
+#tattoo-proceso,
+#tattoo-ubicacion {
     min-height: auto;
-    padding: 2rem 1.2rem;
+    padding: clamp(3rem, 7vw, 6rem) 1.2rem;
 }
 
 /* Make sections transparent so video shows through */
@@ -238,28 +243,218 @@
     background: transparent;
 }
 
+#tattoo-sobre,
 #tattoo-precios,
-#tattoo-clientes {
+#tattoo-clientes,
+#tattoo-proceso,
+#tattoo-ubicacion {
     background: transparent;
 }
 
 #tattoo-about p,
+#tattoo-sobre p,
 #tattoo-precios p,
 #tattoo-clientes p,
-#tattoo-proceso p {
+#tattoo-proceso p,
+#tattoo-ubicacion p {
     margin-bottom: 1rem;
+}
+
+.tattoo-page .summary-inner .contact-title,
+.tattoo-page .summary-inner .bio-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.65rem);
+    font-weight: 200;
+    line-height: 0.95;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: left;
+    margin: 0 0 1.25rem;
+}
+
+.tattoo-page .contact-inner .contact-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.9rem);
+    font-weight: 200;
+    line-height: 0.95;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0 auto 1.25rem;
+}
+
+.tattoo-page .summary-inner .contact-intro,
+.tattoo-page .contact-inner .contact-intro {
+    max-width: 680px;
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1.08rem, 2vw, 1.35rem);
+    font-weight: 500;
+    line-height: 1.55;
+    color: rgba(242, 242, 242, 0.92);
+}
+
+.tattoo-page .summary-inner .contact-intro,
+.tattoo-page .summary-inner .contact-sub {
+    margin-left: 0;
+    margin-right: auto;
+    text-align: left;
+}
+
+.tattoo-page .summary-inner .contact-sub,
+.tattoo-page .contact-inner .contact-sub,
+.tattoo-step p {
+    max-width: 680px;
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(0.92rem, 1.3vw, 1.02rem);
+    line-height: 1.7;
+    color: rgba(242, 242, 242, 0.68);
+    opacity: 1;
+}
+
+.tattoo-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin: 0 0 1rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    line-height: 1;
+    text-transform: uppercase;
+    color: rgba(242, 242, 242, 0.46);
+}
+
+.tattoo-kicker::before {
+    content: "";
+    width: 2.1rem;
+    height: 1px;
+    background: rgba(142, 3, 32, 0.88);
+    box-shadow: 0 0 8px rgba(200, 40, 65, 0.4);
+}
+
+.tattoo-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem 1rem;
+    max-width: 760px;
+    margin: 2rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tattoo-list li {
+    border-left: 1px solid rgba(142, 3, 32, 0.75);
+    padding: 0.2rem 0 0.2rem 0.85rem;
+    color: rgba(242, 242, 242, 0.82);
+    font-size: 0.92rem;
+    line-height: 1.35;
+}
+
+.tattoo-list--stacked {
+    grid-template-columns: 1fr;
+    max-width: 620px;
+}
+
+.tattoo-note {
+    max-width: 620px;
+    margin-top: 1.5rem;
+    color: rgba(242, 242, 242, 0.54);
+    font-size: 0.88rem;
+    line-height: 1.55;
+}
+
+.tattoo-process {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1px;
+    margin-top: 2.2rem;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.tattoo-step {
+    min-height: 14rem;
+    padding: 1.25rem;
+    background: #0A0A0A;
+}
+
+.tattoo-step span {
+    display: block;
+    margin-bottom: 1.8rem;
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    font-weight: 200;
+    color: rgba(142, 3, 32, 0.95);
+}
+
+.tattoo-step h3 {
+    margin: 0 0 0.75rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #F2F2F2;
+}
+
+.tattoo-step p {
+    margin: 0;
+    font-size: 0.86rem;
+    line-height: 1.55;
+}
+
+.tattoo-prices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.tattoo-prices p {
+    min-width: min(100%, 15rem);
+    margin: 0;
+    padding: 1.1rem 1.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.tattoo-prices span,
+.tattoo-prices strong {
+    display: block;
+}
+
+.tattoo-prices span {
+    margin-bottom: 0.5rem;
+    font-size: 0.74rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(242, 242, 242, 0.5);
+}
+
+.tattoo-prices strong {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 200;
+    letter-spacing: 0.04em;
+    color: #F2F2F2;
 }
 
 /* --- CONTACT SECTION ON TATTOO PAGE --- */
 #contacto .contact-inner {
     max-width: 820px;
     margin: 0 auto;
+    font-family: 'Inter', sans-serif;
 }
 
-.contact-location {
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
+.tattoo-page .contact-inner {
+    text-align: center;
+}
+
+.tattoo-page .contact-inner .tattoo-kicker {
+    justify-content: center;
+}
+
+.tattoo-page .contact-inner .contact-intro,
+.tattoo-page .contact-inner .contact-sub {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 @media (max-width: 700px) {
@@ -339,7 +534,7 @@
     }
 
     .tattoo-page .cta-button {
-        max-width: calc(100% - 7rem);
+        max-width: calc(100% - 9.6rem);
         padding: 0.58rem 0.85rem;
         font-size: 0.66rem;
         letter-spacing: 0;
@@ -349,7 +544,7 @@
 
     .tattoo-page .scroll-indicator-btn {
         flex: 0 0 auto;
-        max-width: 6.5rem;
+        max-width: 8.8rem;
         font-size: 0.62rem;
         letter-spacing: 0;
         gap: 0.4rem;
@@ -362,6 +557,40 @@
     .tattoo-page .contact-cta.cta-button {
         white-space: normal;
         line-height: 1.25;
+    }
+
+    #tattoo-about .summary-inner,
+    #tattoo-sobre .summary-inner,
+    #tattoo-precios .summary-inner,
+    #tattoo-clientes .summary-inner,
+    #tattoo-proceso .summary-inner,
+    #tattoo-ubicacion .summary-inner {
+        text-align: left;
+    }
+
+    .tattoo-list {
+        grid-template-columns: 1fr;
+        margin-top: 1.5rem;
+    }
+
+    .tattoo-process {
+        grid-template-columns: 1fr;
+        margin-top: 1.6rem;
+    }
+
+    .tattoo-step {
+        min-height: auto;
+        padding: 1rem 0;
+    }
+
+    .tattoo-step span {
+        margin-bottom: 0.75rem;
+        font-size: 1.6rem;
+    }
+
+    .tattoo-prices {
+        display: grid;
+        grid-template-columns: 1fr;
     }
 }
 
@@ -382,8 +611,8 @@
     }
 
     .tattoo-page .scroll-indicator-btn {
-        max-width: 5.8rem;
-        font-size: 0.58rem;
+        max-width: 8rem;
+        font-size: 0.54rem;
     }
 
     .tattoo-page .scroll-indicator {
