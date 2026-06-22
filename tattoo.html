@@ -31,9 +31,7 @@
 
     <main>
         <section class="hero" id="hero">
-            <video id="heroImageLayer" class="hero-image-layer" autoplay muted loop playsinline preload="auto" poster="/assets/images/Hero1.jpg" disablePictureInPicture controlsList="nodownload noremoteplayback" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
-                <source src="assets/videos/tattoo/hero1.mp4" type="video/mp4">
-            </video>
+            <video id="heroImageLayer" class="hero-image-layer" autoplay muted loop playsinline preload="metadata" disablePictureInPicture controlsList="nodownload noremoteplayback" src="assets/videos/tattoo/hero1.mp4" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></video>
             <div class="hero-text">
                 <div class="hero-text-content">
                     <div id="hero-sequence">
@@ -103,7 +101,7 @@
         <section class="section" id="tattoo-proceso">
             <div class="summary-inner">
                 <p class="tattoo-kicker">Proceso</p>
-                <h2 class="bio-title">Cómo trabajamos</h2>
+                <h2 class="bio-title">Cómo trabajo</h2>
                 <div class="tattoo-process">
                     <article class="tattoo-step">
                         <span>1</span>
@@ -200,11 +198,11 @@
             });
         })();
 
-        // Scroll down to tattoo process section
+        // Scroll down to the first tattoo section
         (function initScrollDown() {
             const scrollDownBtn = document.getElementById('scrollDownBtn');
-            const tattooProcessSection = document.getElementById('tattoo-proceso');
-            if (!scrollDownBtn || !tattooProcessSection) return;
+            const tattooAboutSection = document.getElementById('tattoo-about');
+            if (!scrollDownBtn || !tattooAboutSection) return;
 
             scrollDownBtn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -212,11 +210,11 @@
                 if (window.gsap) {
                     gsap.to(window, {
                         duration: 0.8,
-                        scrollTo: { y: tattooProcessSection, autoKill: false },
+                        scrollTo: { y: tattooAboutSection, autoKill: false },
                         ease: "power2.inOut"
                     });
                 } else {
-                    tattooProcessSection.scrollIntoView({ behavior: 'smooth' });
+                    tattooAboutSection.scrollIntoView({ behavior: 'smooth' });
                 }
             });
         })();

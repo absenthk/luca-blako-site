@@ -273,9 +273,9 @@
 .tattoo-page .summary-inner .contact-title,
 .tattoo-page .summary-inner .bio-title {
     font-family: 'Oswald', sans-serif;
-    font-size: clamp(2rem, 5vw, 3.65rem);
+    font-size: clamp(1.85rem, 4.8vw, 3.45rem);
     font-weight: 200;
-    line-height: 0.95;
+    line-height: 1.08;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     text-align: left;
@@ -284,9 +284,9 @@
 
 .tattoo-page .contact-inner .contact-title {
     font-family: 'Oswald', sans-serif;
-    font-size: clamp(2.2rem, 5vw, 3.9rem);
+    font-size: clamp(1.8rem, 4.4vw, 3.2rem);
     font-weight: 200;
-    line-height: 0.95;
+    line-height: 1.15;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     text-align: center;

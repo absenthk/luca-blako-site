@@ -21,6 +21,7 @@ export function initScrollIndicator() {
     const track = indicator.querySelector(".scroll-indicator__track");
     const thumb = indicator.querySelector(".scroll-indicator__thumb");
     let isDragging = false;
+    let dragOffset = 0;
 
     function updateIndicator() {
         const max = scrollMax();
@@ -59,9 +60,9 @@ export function initScrollIndicator() {
     function getProgressFromPointer(clientY) {
         const rect = track.getBoundingClientRect();
         const travel = track.offsetHeight - thumb.offsetHeight;
-        const y = clientY - rect.top - thumb.offsetHeight / 2;
+        const y = clientY - rect.top - dragOffset;
 
-        return travel > 0 ? y / travel : 0;
+        return travel > 0 ? Math.min(Math.max(y / travel, 0), 1) : 0;
     }
 
     function startDrag(event) {
@@ -69,6 +70,14 @@ export function initScrollIndicator() {
         isDragging = true;
         indicator.classList.add("is-dragging");
         indicator.setPointerCapture?.(event.pointerId);
+
+        const thumbRect = thumb.getBoundingClientRect();
+        if (event.target === thumb) {
+            dragOffset = event.clientY - thumbRect.top;
+        } else {
+            dragOffset = thumbRect.height / 2;
+        }
+
         scrollToProgress(getProgressFromPointer(event.clientY), true);
     }
 
