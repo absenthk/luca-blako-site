@@ -7,7 +7,7 @@ export function initHero() {
     if (!hero || !heroText || !heroTextContent || !heroImageLayer) return;
 
     const heroWords = Array.from(document.querySelectorAll(".hero-word"));
-    const heroCtaItems = Array.from(document.querySelectorAll(".hero-cta .cta-button"));
+    const heroCtaItems = Array.from(document.querySelectorAll(".hero-cta .cta-button, .hero-cta .scroll-indicator-btn"));
     const heroHeight = hero.offsetHeight || window.innerHeight;
 
     function fitTattooTitleToTagline() {

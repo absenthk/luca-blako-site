@@ -143,40 +143,62 @@
 }
 
 .js .tattoo-page .hero-cta .cta-button,
-.js .tattoo-page .contact-cta.cta-button {
-    opacity: 0;
-    transform: translateY(60px);
-    filter: blur(15px);
-}
-
-/* Red CTA Button with backdrop blur - transparent style */
-.tattoo-page .cta-button {
-    padding: 0.65rem 1.5rem;
-    background: #8E0320;
-    border: 1px solid rgba(210, 42, 70, 0.72);
-    color: #F2F2F2;
-    border-radius: 999px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    text-decoration: none;
-    display: inline-block;
-    cursor: pointer;
-    transition: all 0.25s ease-out;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 0 10px rgba(200, 40, 65, 0.48), 0 0 18px rgba(200, 40, 65, 0.24);
-    text-shadow: 0 0 8px rgba(255, 60, 90, 0.9), 0 0 18px rgba(200, 20, 50, 0.72);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    animation: buttonBreathe 3s ease-in-out infinite;
-}
-
-@keyframes buttonBreathe {
-    0%, 100% {
-        box-shadow: 0 0 10px rgba(200, 40, 65, 0.48), 0 0 18px rgba(200, 40, 65, 0.24);
+    .js .tattoo-page .hero-cta .scroll-indicator-btn,
+    .js .tattoo-page .contact-cta.cta-button {
+        opacity: 0;
+        transform: translateY(60px);
+        filter: blur(15px);
     }
-    50% {
-        box-shadow: 0 0 14px rgba(200, 40, 65, 0.62), 0 0 24px rgba(200, 40, 65, 0.32);
+
+    /* Red CTA Button with backdrop blur - transparent style */
+    .tattoo-page .cta-button {
+        padding: 0.65rem 1.5rem;
+        background: #8E0320;
+        border: 1px solid rgba(210, 42, 70, 0.72);
+        color: #F2F2F2;
+        border-radius: 999px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        transition: all 0.25s ease-out;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 0 10px rgba(200, 40, 65, 0.48), 0 0 18px rgba(200, 40, 65, 0.24);
+        text-shadow: 0 0 8px rgba(255, 60, 90, 0.9), 0 0 18px rgba(200, 20, 50, 0.72);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        animation: buttonBreathe 3s ease-in-out infinite;
+    }
+
+    .tattoo-page .scroll-indicator-btn {
+        background: transparent;
+        border: none;
+        color: #F2F2F2;
+        cursor: pointer;
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0;
+        text-transform: uppercase;
+        transition: color 0.25s ease-out, text-shadow 0.25s ease-out, transform 0.25s ease-out;
+    }
+
+    .tattoo-page .scroll-indicator-btn:hover {
+        color: #ffffff;
+        text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+        transform: translateY(-1px);
+    }
+
+    .tattoo-page .scroll-indicator-btn svg {
+        transition: transform 0.3s ease-out, fill 0.25s ease-out;
+    }
+
+    .tattoo-page .scroll-indicator-btn:hover svg {
+        transform: translateY(3px);
     }
 }
 
@@ -213,7 +235,6 @@
 
 #tattoo-about,
 #tattoo-sobre,
-#tattoo-precios,
 #tattoo-clientes,
 #tattoo-proceso,
 #tattoo-ubicacion {
@@ -221,9 +242,23 @@
     padding: clamp(3rem, 7vw, 6rem) 1.2rem;
 }
 
+/* Reduce spacing for the Inversión section specifically on Tattoo page */
+#tattoo-precios {
+    min-height: auto;
+    padding-top: clamp(2rem, 5vw, 4rem);
+    padding-bottom: clamp(1rem, 3vw, 2rem);
+}
+
 /* Make sections transparent so video shows through */
 #tattoo-about {
     background: transparent;
+}
+
+/* Reduce space before contact on tattoo page to avoid large black gap */
+.tattoo-page #contacto.contact-section {
+    min-height: auto;
+    padding-top: clamp(1.5rem, 3.5vw, 2.5rem);
+    padding-bottom: clamp(1.5rem, 3.5vw, 2.5rem);
 }
 
 #tattoo-sobre,
@@ -392,10 +427,13 @@
 }
 
 .tattoo-prices p {
-    min-width: min(100%, 15rem);
-    margin: 0;
-    padding: 1.1rem 1.2rem;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    min-width: auto;
+    margin: 0 1.2rem 0 0;
+    padding: 0;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
 }
 
 .tattoo-prices span,
