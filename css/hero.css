@@ -55,7 +55,7 @@
 .hero-image-layer {
     position: absolute;
     inset: 0;
-    background: url('/assets/images/Hero1.jpg') center center no-repeat;
+    background: url('../images/Hero1.jpg') center center no-repeat;
     background-size: cover;
     z-index: 2;
     opacity: 1;
