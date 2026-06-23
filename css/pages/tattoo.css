@@ -143,7 +143,6 @@
 }
 
 .js .tattoo-page .hero-cta .cta-button,
-.js .tattoo-page .hero-cta .scroll-indicator-btn,
 .js .tattoo-page .contact-cta.cta-button {
     opacity: 0;
     transform: translateY(60px);
@@ -194,32 +193,6 @@
 }
 
 /* Scroll down indicator */
-.tattoo-page .scroll-indicator-btn {
-    background: transparent;
-    border: none;
-    color: #F2F2F2;
-    cursor: pointer;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0;
-    transition: all 0.25s ease-out;
-}
-
-.tattoo-page .scroll-indicator-btn:hover {
-    opacity: 0.7;
-}
-
-.tattoo-page .scroll-indicator-btn svg {
-    transition: transform 0.3s ease-out;
-}
-
-.tattoo-page .scroll-indicator-btn:hover svg {
-    transform: translateY(3px);
-}
 
 @keyframes bounce {
     0%, 100% { transform: translateY(0); }
@@ -552,17 +525,6 @@
         box-sizing: border-box;
     }
 
-    .tattoo-page .scroll-indicator-btn {
-        flex: 0 0 auto;
-        max-width: 8.8rem;
-        font-size: 0.62rem;
-        letter-spacing: 0;
-        gap: 0.4rem;
-    }
-
-    .tattoo-page .scroll-indicator {
-        right: 0.2rem;
-    }
 
     .tattoo-page .contact-cta.cta-button {
         white-space: normal;
@@ -620,12 +582,4 @@
         padding-inline: 0.72rem;
     }
 
-    .tattoo-page .scroll-indicator-btn {
-        max-width: 8rem;
-        font-size: 0.54rem;
-    }
-
-    .tattoo-page .scroll-indicator {
-        right: 0.1rem;
-    }
 }
